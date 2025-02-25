@@ -6,10 +6,13 @@
 		<field name="arch" type="xml">
 			<list>
 				<field name="sequence" widget="handle"/>
+				<field name="user_id" widget="many2one_avatar"/>
 				<field name="title"/>
+				<field name="stage_id"/>
+				<field name="category_id"/>
 				<field name="query" optional="1"/>
 				<field name="reported_date"/>
-				<field name="user_id"/>
+				<field name="tag_ids" widget="many2many_tags" options="{ 'color_field': 'color' }"/>
 			</list>
 		</field>
 	</record>
@@ -19,6 +22,9 @@
 		<field name="model">helpdesk_app.helpdesk_ticket</field>
 		<field name="arch" type="xml">
 			<form>
+				<header>
+					<field name="stage_id" widget="statusbar"/>
+				</header>
 				<sheet>
 					<widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
 
@@ -31,6 +37,10 @@
 						<group>
 							<field name="reported_date" readonly="True"/>
 							<field name="user_id" options="{ 'no_create': True, 'no_create_edit': True }" widget="many2one_avatar"/>
+						</group>
+						<group>
+							<field name="category_id"/>
+							<field name="tag_ids" widget="many2many_tags" options="{ 'color_field': 'color' }"/>
 						</group>
 						<group colspan="2">
 							<field name="query"/>

@@ -16,3 +16,6 @@ class HelpdeskTicket(models.Model):
     description = fields.Html('Description')
     reported_date = fields.Date('Reported Date', default=fields.Date.today)
     user_id = fields.Many2one('res.users', 'Reported By', default=lambda self: self.env.user)
+    category_id = fields.Many2one('helpdesk_app.helpdesk_category', string='Category')
+    tag_ids = fields.Many2many('helpdesk_app.helpdesk_tag', string='Tags')
+    stage_id = fields.Many2one('helpdesk_app.helpdesk_stage', string='Stage', default=lambda self: self.env.ref('helpdesk_app.helpdesk_stage_1'))
