@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+		<record model="helpdesk_app.helpdesk_tag" id="helpdesk_tag_1" forcecreate="False">
+			<field name="name">Urgent</field>
+			<field name="color">1</field>
+		</record>
+		<record model="helpdesk_app.helpdesk_tag" id="helpdesk_tag_2" forcecreate="False">
+			<field name="name">Important</field>
+			<field name="color">8</field>
+		</record>
+		<record model="helpdesk_app.helpdesk_tag" id="helpdesk_tag_3" forcecreate="False">
+			<field name="name">Normal</field>
+			<field name="color">10</field>
+		</record>
+		<record model="helpdesk_app.helpdesk_tag" id="helpdesk_tag_4" forcecreate="False">
+			<field name="name">Low</field>
+			<field name="color">11</field>
+		</record>
+	</data>
+</odoo>
