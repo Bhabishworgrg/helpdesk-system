@@ -4,7 +4,8 @@
     'name': 'Helpdesk System',
     'version': '0.1',
     'depends': [
-        'base_setup'
+        'base_setup',
+        'mail',
     ],
     'data': [
         'security/ir.model.access.csv',

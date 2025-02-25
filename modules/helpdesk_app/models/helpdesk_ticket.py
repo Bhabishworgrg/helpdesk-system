@@ -8,6 +8,7 @@ class HelpdeskTicket(models.Model):
     _description = 'Helpdesk'
     _rec_name = 'title'
     _order = 'sequence asc'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     sequence = fields.Integer('Sequence', default=1)
     active = fields.Boolean('Active', default=True)
