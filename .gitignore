@@ -1,0 +1,5 @@
+.env
+venv/
+odoo/
+odoo-dev.conf
+docker-compose.yml
