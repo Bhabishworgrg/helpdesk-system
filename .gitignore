@@ -3,3 +3,4 @@ venv/
 odoo/
 odoo-dev.conf
 docker-compose.yml
+__pycache__/
