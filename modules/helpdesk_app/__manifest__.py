@@ -13,6 +13,7 @@
         'views/helpdesk_ticket.xml',
         'views/helpdesk_category.xml',
         'views/helpdesk_tag.xml',
+        'views/helpdesk_stage.xml',
         'views/menus.xml',
     ],
     'installable': True,
