@@ -11,6 +11,7 @@
         'data/helpdesk_category_data.xml',
         'views/helpdesk_ticket.xml',
         'views/helpdesk_category.xml',
+        'views/helpdesk_tag.xml',
         'views/menus.xml',
     ],
     'installable': True,

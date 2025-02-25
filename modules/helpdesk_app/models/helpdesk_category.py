@@ -3,6 +3,7 @@
 from odoo import fields, models
 from odoo.exceptions import UserError
 
+
 class HelpdeskCategory(models.Model):
     _name = 'helpdesk_app.helpdesk_category'
     _description = 'Helpdesk Category'
