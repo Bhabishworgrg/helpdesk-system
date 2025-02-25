@@ -4,26 +4,32 @@
 		<record model="helpdesk_app.helpdesk_category" id="helpdesk_category_1" forcecreate="False">
 			<field name="name">Facilities/Maintenance</field>
 			<field name="description">Issues related to office infrastructure, equipment, or maintenance. Examples include broken furniture, HVAC problems, or cleaning requests.</field>
+			<field name="is_prepopulated">True</field>
 		</record>
 		<record model="helpdesk_app.helpdesk_category" id="helpdesk_category_2" forcecreate="False">
 			<field name="name">Onboarding</field>
 			<field name="description">Requests related to new employee setup, such as provisioning accounts, assigning equipment, or scheduling training.</field>
+			<field name="is_prepopulated">True</field>
 		</record>
 		<record model="helpdesk_app.helpdesk_category" id="helpdesk_category_3" forcecreate="False">
 			<field name="name">IT Support</field>
 			<field name="description">Technical issues related to hardware, software, network, or systems. This is a broad category for IT-related problems.</field>
+			<field name="is_prepopulated">True</field>
 		</record>
 		<record model="helpdesk_app.helpdesk_category" id="helpdesk_category_4" forcecreate="False">
 			<field name="name">HR Support</field>
 			<field name="description">Issues related to human resources, such as payroll, benefits, leave requests, or policy questions.</field>
+			<field name="is_prepopulated">True</field>
 		</record>
 		<record model="helpdesk_app.helpdesk_category" id="helpdesk_category_5" forcecreate="False">
 			<field name="name">Training</field>
 			<field name="description">Requests for training or professional development opportunities, including workshops, courses, or certifications.</field>
+			<field name="is_prepopulated">True</field>
 		</record>
 		<record model="helpdesk_app.helpdesk_category" id="helpdesk_category_6" forcecreate="False">
 			<field name="name">General Inquiry</field>
 			<field name="description">Non-specific requests or questions that do not fit into other categories. This is a catch-all category for miscellaneous issues.</field>
+			<field name="is_prepopulated">True</field>
 		</record>
 	</data>
 </odoo>
