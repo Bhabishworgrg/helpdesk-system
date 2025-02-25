@@ -5,6 +5,7 @@
         <field name="model">helpdesk_app.helpdesk_category</field>
         <field name="arch" type="xml">
 			<list editable="bottom">
+				<field name="sequence" widget="handle"/>
 				<field name="name"/>
 				<field name="description"/>
 			</list>

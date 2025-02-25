@@ -8,6 +8,7 @@
     ],
     'data': [
         'security/ir.model.access.csv',
+        'data/helpdesk_category_data.xml',
         'views/helpdesk_ticket.xml',
         'views/helpdesk_category.xml',
         'views/menus.xml',
