@@ -7,6 +7,9 @@
         'base_setup'
     ],
     'data': [
+        'security/ir.model.access.csv',
+        'views/helpdesk_ticket.xml',
+        'views/menus.xml',
     ],
     'installable': True,
     'application': True,

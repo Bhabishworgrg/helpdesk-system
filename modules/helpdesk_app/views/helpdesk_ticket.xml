@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="helpdesk_app_helpdesk_ticket_view_list" model="ir.ui.view">
+		<field name="name">helpdesk_app.helpdesk_ticket.view.list</field>
+		<field name="model">helpdesk_app.helpdesk_ticket</field>
+		<field name="arch" type="xml">
+			<list>
+				<field name="sequence" widget="handle"/>
+				<field name="title"/>
+				<field name="query" optional="1"/>
+				<field name="reported_date"/>
+				<field name="user_id"/>
+			</list>
+		</field>
+	</record>
+
+	<record id="helpdesk_app_helpdesk_ticket_view_form" model="ir.ui.view">
+		<field name="name">helpdesk_app.helpdesk_ticket.view.form</field>
+		<field name="model">helpdesk_app.helpdesk_ticket</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+
+					<label for="title"/>
+					<h1>
+						<field name="title"/>
+					</h1>
+
+					<group>
+						<group>
+							<field name="reported_date"/>
+							<field name="user_id"/>
+						</group>
+						<group>
+							<field name="query"/>
+							<field name="description"/>
+						</group>
+					</group>
+				</sheet>
+				<chatter reload_on_post="True"/>
+			</form>
+		</field>
+	</record>
+
+	<record id="helpdesk_app_helpdesk_ticket_view_search" model="ir.ui.view">
+		<field name="name">helpdesk_app.helpdesk_ticket.view.search</field>
+		<field name="model">helpdesk_app.helpdesk_ticket</field>
+		<field name="arch" type="xml">
+			<search>
+				<filter name="filter_my_tickets" string="My Tickets" domain="[('user_id', '=', uid)]"/>
+				<filter name="filter_archived" string="Archived" domain="[('active', '=', False)]"/>
+				<separator/>
+				<filter name="filter_reported_date" string="Reported Date" date="reported_date"/>
+				<group>
+					<filter name="group_create_uid" string="Created By" context="{ 'group_by':'create_uid' }"/>
+					<filter name="group_reported_date" string="Reported Date" context="{ 'group_by':'reported_date' }"/>
+				</group>
+			</search>
+		</field>
+	</record>
+
+	<record id="action_helpdesk_app_helpdesk_ticket_all" model="ir.actions.act_window">
+		<field name="name">All Tickets</field>
+		<field name="res_model">helpdesk_app.helpdesk_ticket</field>
+		<field name="view_mode">list,form</field>
+		<field name="context">
+			{
+				'search_default_filter_my_tickets' : 1,
+			}
+		</field>
+	</record>
+	
+	<record id="action_helpdesk_app_helpdesk_ticket_completed" model="ir.actions.act_window">
+		<field name="name">Completed Tickets</field>
+		<field name="res_model">helpdesk_app.helpdesk_ticket</field>
+		<field name="view_mode">list,form</field>
+		<field name="context">
+			{
+				'search_default_filter_my_tickets' : 1,
+			}
+		</field>
+	</record>
+
+	<record id="action_helpdesk_app_helpdesk_ticket_incomplete" model="ir.actions.act_window">
+		<field name="name">Incomplete Tickets</field>
+		<field name="res_model">helpdesk_app.helpdesk_ticket</field>
+		<field name="view_mode">list,form</field>
+		<field name="context">
+			{
+				'search_default_filter_my_tickets' : 1,
+			}
+		</field>
+	</record>
+</odoo>

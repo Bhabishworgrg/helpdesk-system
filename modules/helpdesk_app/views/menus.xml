@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- Helpdesk App -->
+	<menuitem
+		id="menu_helpdesk_app"
+		name="Helpdesk App"
+		sequence="1"
+	/>
+
+
+	<!-- Helpdesk Ticket -->
+	<menuitem
+		id="menu_helpdesk_ticket"
+		name="Tickets"
+		parent="menu_helpdesk_app"
+		sequence="1"
+	/>
+
+	<menuitem 
+		id="menu_helpdesk_ticket_all" 
+		name="All Tickets" 
+		parent="menu_helpdesk_ticket" 
+		action="action_helpdesk_app_helpdesk_ticket_all" 
+		sequence="1"
+	/>
+
+	<menuitem
+		id="menu_helpdesk_ticket_completed"
+		name="Completed Tickets"
+		parent="menu_helpdesk_ticket"
+		action="action_helpdesk_app_helpdesk_ticket_completed"
+		sequence="2"
+	/>
+	
+	<menuitem
+		id="menu_helpdesk_ticket_incomplete"
+		name="Incomplete Tickets"
+		parent="menu_helpdesk_ticket"
+		action="action_helpdesk_app_helpdesk_ticket_incomplete"
+		sequence="3"
+	/>
+</odoo>
+
