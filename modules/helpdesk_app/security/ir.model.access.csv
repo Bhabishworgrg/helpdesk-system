@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 helpdesk_app.access_helpdesk_app_helpdesk_ticket,access_helpdesk_app_helpdesk_ticket,helpdesk_app.model_helpdesk_app_helpdesk_ticket,base.group_user,1,1,1,1
+helpdesk_app.access_helpdesk_app_helpdesk_category,access_helpdesk_app_helpdesk_category,helpdesk_app.model_helpdesk_app_helpdesk_category,base.group_user,1,1,1,1

@@ -9,6 +9,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/helpdesk_ticket.xml',
+        'views/helpdesk_category.xml',
         'views/menus.xml',
     ],
     'installable': True,

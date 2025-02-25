@@ -34,10 +34,25 @@
 	
 	<menuitem
 		id="menu_helpdesk_ticket_incomplete"
-		name="Incomplete Tickets"
+		name="Incomplete tickets"
 		parent="menu_helpdesk_ticket"
 		action="action_helpdesk_app_helpdesk_ticket_incomplete"
 		sequence="3"
 	/>
-</odoo>
 
+	<!-- Helpdesk Configuration -->
+	<menuitem
+		id="menu_helpdesk_config"
+		name="Configuration"
+		parent="menu_helpdesk_app"
+		sequence="2"
+	/>
+	
+	<menuitem
+		id="menu_helpdesk_category"
+		name="Category"
+		parent="menu_helpdesk_config"
+		action="action_helpdesk_app_helpdesk_category"
+		sequence="1"
+	/>
+</odoo>

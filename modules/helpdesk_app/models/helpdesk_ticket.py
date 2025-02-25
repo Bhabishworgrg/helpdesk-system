@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from odoo import fields, models, api, Command, _
-from odoo.exceptions import UserError
-from datetime import timedelta
+from odoo import fields, models
 
 
 class HelpdeskTicket(models.Model):
     _name = 'helpdesk_app.helpdesk_ticket'
     _description = 'Helpdesk'
-    _order = 'sequence asc'
     _rec_name = 'title'
+    _order = 'sequence asc'
 
     sequence = fields.Integer('Sequence', default=1)
     active = fields.Boolean('Active', default=True)
