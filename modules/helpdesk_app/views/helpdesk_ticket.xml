@@ -24,8 +24,8 @@
 			<form>
 				<header>
 					<button name="%(helpdesk_app.action_helpdesk_app_helpdesk_ticket_send_wizard)d" string="Send Ticket" type="action" class="btn-primary"/>
-					<button name="action_cancel" string="Cancel" type="object" class="btn-secondary" invisible="is_completed_or_cancelled"/>
-					<button name="action_restore" string="Restore" type="object" class="btn-secondary" invisible="not is_completed_or_cancelled"/>
+					<button name="%(helpdesk_app.action_helpdesk_app_helpdesk_ticket_cancel_wizard)d" string="Cancel" type="action" class="btn-secondary" invisible="is_completed_or_cancelled"/>
+					<button name="%(helpdesk_app.action_helpdesk_app_helpdesk_ticket_restore_wizard)d" string="Restore" type="action" class="btn-secondary" invisible="not is_completed_or_cancelled"/>
 					<field name="stage_id" widget="statusbar"/>
 				</header>
 				<sheet>

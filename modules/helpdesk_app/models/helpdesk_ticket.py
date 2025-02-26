@@ -32,8 +32,3 @@ class HelpdeskTicket(models.Model):
 #        if next_stage:
 #            self.stage_id = next_stage 
 #
-    def action_cancel(self):
-        self.stage_id = self.env.ref('helpdesk_app.helpdesk_stage_4')
-
-    def action_restore(self):
-        self.stage_id = self.env['helpdesk_app.helpdesk_stage'].search([('sequence', '=', 1)])
