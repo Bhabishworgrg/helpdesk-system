@@ -23,6 +23,9 @@
 		<field name="arch" type="xml">
 			<form>
 				<header>
+					<button name="action_next_stage" string="Next Stage" type="object" class="btn-primary"/>
+					<button name="action_cancel" string="Cancel" type="object" class="btn-secondary" invisible="is_completed_or_cancelled"/>
+					<button name="action_restore" string="Restore" type="object" class="btn-secondary" invisible="not is_completed_or_cancelled"/>
 					<field name="stage_id" widget="statusbar"/>
 				</header>
 				<sheet>

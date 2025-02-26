@@ -20,3 +20,19 @@ class HelpdeskTicket(models.Model):
     category_id = fields.Many2one('helpdesk_app.helpdesk_category', string='Category')
     tag_ids = fields.Many2many('helpdesk_app.helpdesk_tag', string='Tags')
     stage_id = fields.Many2one('helpdesk_app.helpdesk_stage', string='Stage', default=lambda self: self.env.ref('helpdesk_app.helpdesk_stage_1'))
+    is_completed_or_cancelled = fields.Boolean('Is Completed or Cancelled', compute='_compute_is_completed_or_cancelled')
+
+    def _compute_is_completed_or_cancelled(self):
+        for rec in self:
+            rec.is_completed_or_cancelled = rec.stage_id in [self.env.ref('helpdesk_app.helpdesk_stage_3'), self.env.ref('helpdesk_app.helpdesk_stage_4')]
+
+    def action_next_stage(self):
+        next_stage = self.env['helpdesk_app.helpdesk_stage'].search([('sequence', '>', self.stage_id.sequence)], limit=1)
+        if next_stage:
+            self.stage_id = next_stage 
+
+    def action_cancel(self):
+        self.stage_id = self.env.ref('helpdesk_app.helpdesk_stage_4')
+
+    def action_restore(self):
+        self.stage_id = self.env['helpdesk_app.helpdesk_stage'].search([('sequence', '=', 1)])

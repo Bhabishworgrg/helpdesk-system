@@ -9,7 +9,7 @@ class HelpdeskStage(models.Model):
     _description = 'Helpdesk Stage'
     _order = 'sequence asc'
 
-    sequence = fields.Integer('Sequence', default=1)
+    sequence = fields.Integer('Sequence', default=lambda self: self.search_count([]) + 1)
     name = fields.Char('Name', required=True)
     is_prepopulated = fields.Boolean('Is Prepopulated', default=False)
 
