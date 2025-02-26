@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="helpdesk_app_helpdesk_type_view_list" model="ir.ui.view">
+		<field name="name">helpdesk_app.helpdesk_type.view.list</field>
+		<field name="model">helpdesk_app.helpdesk_type</field>
+		<field name="arch" type="xml">
+			<list editable="bottom">
+				<field name="name"/>
+			</list>
+		</field>
+	</record>
+
+	<record id="action_helpdesk_app_helpdesk_type" model="ir.actions.act_window">
+		<field name="name">Helpdesk Tag</field>
+		<field name="res_model">helpdesk_app.helpdesk_type</field>
+		<field name="view_mode">list</field>
+	</record>
+</odoo>

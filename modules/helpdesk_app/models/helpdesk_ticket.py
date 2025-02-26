@@ -20,6 +20,7 @@ class HelpdeskTicket(models.Model):
     category_id = fields.Many2one('helpdesk_app.helpdesk_category', string='Category')
     tag_ids = fields.Many2many('helpdesk_app.helpdesk_tag', string='Tags')
     stage_id = fields.Many2one('helpdesk_app.helpdesk_stage', string='Stage', default=lambda self: self.env.ref('helpdesk_app.helpdesk_stage_1'))
+    type_id = fields.Many2one('helpdesk_app.helpdesk_type', string='Type')
     is_completed_or_cancelled = fields.Boolean('Is Completed or Cancelled', compute='_compute_is_completed_or_cancelled')
 
     def _compute_is_completed_or_cancelled(self):

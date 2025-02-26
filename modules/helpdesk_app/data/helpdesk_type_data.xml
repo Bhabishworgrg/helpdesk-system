@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+		<record model="helpdesk_app.helpdesk_type" id="helpdesk_type_1" forcecreate="False">
+			<field name="name">Internal</field>
+		</record>
+		<record model="helpdesk_app.helpdesk_type" id="helpdesk_type_2" forcecreate="False">
+			<field name="name">External</field>
+		</record>
+	</data>
+</odoo>

@@ -71,4 +71,12 @@
 		action="action_helpdesk_app_helpdesk_stage"
 		sequence="3"
 	/>
+	
+	<menuitem
+		id="menu_helpdesk_type"
+		name="Type"
+		parent="menu_helpdesk_config"
+		action="action_helpdesk_app_helpdesk_type"
+		sequence="4"
+	/>
 </odoo>
