@@ -39,11 +39,11 @@
 					<group>
 						<group>
 							<field name="reported_date" readonly="True"/>
-							<field name="user_id" options="{ 'no_create': True, 'no_create_edit': True }" widget="many2one_avatar" readonly="is_completed_or_cancelled"/>
+							<field name="user_id" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True }" widget="many2one_avatar" readonly="is_completed_or_cancelled"/>
 						</group>
 						<group>
-							<field name="category_id" readonly="is_completed_or_cancelled"/>
-							<field name="tag_ids" widget="many2many_tags" options="{ 'color_field': 'color' }" readonly="is_completed_or_cancelled"/>
+							<field name="category_id" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True }" readonly="is_completed_or_cancelled"/>
+							<field name="tag_ids" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True, 'color_field': 'color' }" widget="many2many_tags" readonly="is_completed_or_cancelled"/>
 						</group>
 						<group colspan="2">
 							<field name="query" readonly="is_completed_or_cancelled"/>
