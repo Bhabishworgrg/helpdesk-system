@@ -51,6 +51,18 @@
 							<field name="description" readonly="is_completed_or_cancelled"/>
 						</group>
 					</group>
+
+					<notebook>
+						<page string="Remarks" name="helpdesk_remarks">
+							<field name="remark_ids" readonly="True">
+								<list>
+									<field name="date_time"/>
+									<field name="remark"/>
+									<field name="document"/>
+								</list>
+							</field>
+						</page>
+					</notebook>
 				</sheet>
 				<chatter reload_on_post="True"/>
 			</form>
