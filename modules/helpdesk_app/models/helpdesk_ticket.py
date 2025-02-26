@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import fields, models
+from odoo import fields, models, api
 
 
 class HelpdeskTicket(models.Model):
@@ -22,6 +22,9 @@ class HelpdeskTicket(models.Model):
     stage_id = fields.Many2one('helpdesk_app.helpdesk_stage', string='Stage', default=lambda self: self.env.ref('helpdesk_app.helpdesk_stage_1'))
     type_id = fields.Many2one('helpdesk_app.helpdesk_type', string='Type', default=lambda self: self.env.ref('helpdesk_app.helpdesk_type_1'))
     remark_ids = fields.One2many('helpdesk_app.helpdesk_remark', 'ticket_id', string='Remarks')
+    team_id = fields.Many2one('helpdesk_app.helpdesk_team', string='Team')
+    team_member_ids = fields.Many2many('res.users', string='Team Members', related='team_id.member_ids')
+    team_member_id = fields.Many2one('res.users', string='Team Member', domain='[("id", "in", team_member_ids)]')
     is_completed_or_cancelled = fields.Boolean('Is Completed or Cancelled', compute='_compute_is_completed_or_cancelled')
 
     def _compute_is_completed_or_cancelled(self):
