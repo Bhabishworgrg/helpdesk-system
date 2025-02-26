@@ -79,4 +79,12 @@
 		action="action_helpdesk_app_helpdesk_type"
 		sequence="4"
 	/>
+
+	<menuitem
+		id="menu_helpdesk_team"
+		name="Team"
+		parent="menu_helpdesk_config"
+		action="action_helpdesk_app_helpdesk_team"
+		sequence="5"
+	/>
 </odoo>

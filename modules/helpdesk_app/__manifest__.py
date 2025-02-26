@@ -21,6 +21,7 @@
         'views/helpdesk_tag.xml',
         'views/helpdesk_stage.xml',
         'views/helpdesk_type.xml',
+        'views/helpdesk_team.xml',
         'views/menus.xml',
     ],
     'installable': True,
