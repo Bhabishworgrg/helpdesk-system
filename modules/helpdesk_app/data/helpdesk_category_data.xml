@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-	<data noupdate="1">
+	<data noupdate="0">
 		<record model="helpdesk_app.helpdesk_category" id="helpdesk_category_1" forcecreate="False">
-			<field name="name">Facilities/Maintenance</field>
-			<field name="description">Issues related to office infrastructure, equipment, or maintenance. Examples include broken furniture, HVAC problems, or cleaning requests.</field>
+			<field name="name">General Inquiry</field>
+			<field name="description">Non-specific requests or questions that do not fit into other categories. This is a catch-all category for miscellaneous issues.</field>
 			<field name="is_prepopulated">True</field>
 		</record>
 		<record model="helpdesk_app.helpdesk_category" id="helpdesk_category_2" forcecreate="False">
@@ -22,13 +22,8 @@
 			<field name="is_prepopulated">True</field>
 		</record>
 		<record model="helpdesk_app.helpdesk_category" id="helpdesk_category_5" forcecreate="False">
-			<field name="name">Training</field>
-			<field name="description">Requests for training or professional development opportunities, including workshops, courses, or certifications.</field>
-			<field name="is_prepopulated">True</field>
-		</record>
-		<record model="helpdesk_app.helpdesk_category" id="helpdesk_category_6" forcecreate="False">
-			<field name="name">General Inquiry</field>
-			<field name="description">Non-specific requests or questions that do not fit into other categories. This is a catch-all category for miscellaneous issues.</field>
+			<field name="name">Facilities/Maintenance</field>
+			<field name="description">Issues related to office infrastructure, equipment, or maintenance. Examples include broken furniture, HVAC problems, or cleaning requests.</field>
 			<field name="is_prepopulated">True</field>
 		</record>
 	</data>
