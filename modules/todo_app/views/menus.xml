@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- Todo App -->
+	<menuitem
+		id="menu_todo_app"
+		name="Todo App"
+		sequence="1"
+	/>
+
+
+	<!-- Todo -->
+	<menuitem
+		id="menu_todo"
+		name="Todo"
+		parent="menu_todo_app"
+		sequence="1"
+	/>
+
+	<menuitem 
+		id="menu_todo_all" 
+		name="All Todos" 
+		parent="menu_todo" 
+		action="action_todo_app_todo_all" 
+		sequence="1"
+	/>
+
+	<menuitem
+		id="menu_todo_completed"
+		name="Completed Todos"
+		parent="menu_todo"
+		action="action_todo_app_todo_completed"
+		sequence="2"
+	/>
+
+	<menuitem
+		id="menu_todo_incomplete"
+		name="Incomplete Todos"
+		parent="menu_todo"
+		action="action_todo_app_todo_incomplete"
+		sequence="3"
+	/>
+</odoo>

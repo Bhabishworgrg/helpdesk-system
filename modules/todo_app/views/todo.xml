@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="todo_app_todo_view_kanban" model="ir.ui.view">
+		<field name="name">todo_app.todo.view.kanban</field>
+		<field name="model">todo_app.todo</field>
+		<field name="arch" type="xml">
+			<kanban class="o_kanban_mobile"> 
+				<templates>
+					<t t-name="card">
+						<main>
+							<field name="name" class="fw-bold"/>
+							<field name="summary"/>
+						</main>
+						<footer class="pt-1 mt-0">
+							<div class="d-flex mt-auto">
+								<field name="date_deadline" widget="remaining_days"/>
+							</div>
+						</footer>
+					</t>
+				</templates>
+			</kanban>
+		</field>
+	</record>
+
+	<record id="todo_app_todo_view_list" model="ir.ui.view">
+		<field name="name">todo_app.todo.view.list</field>
+		<field name="model">todo_app.todo</field>
+		<field name="arch" type="xml">
+			<list>
+				<field name="sequence" widget="handle"/>
+				<field name="name"/>
+				<field name="date_deadline"/>
+				<field name="summary" optional="1"/>
+			</list>
+		</field>
+	</record>
+
+	<record id="todo_app_todo_view_calendar" model="ir.ui.view">
+		<field name="name">todo_app.todo.view.calendar</field>
+		<field name="model">todo_app.todo</field>
+		<field name="arch" type="xml">
+			<calendar create="0" mode="month" date_start="date_deadline" hide_time="true" event_limit="5">
+				<field name="is_complete"/>
+				<field name="progress" widget="progressbar"/>
+				<field name="summary"/>
+				<field name="description"/>
+			</calendar>
+		</field>
+	</record>
+
+	<record id="todo_app_todo_view_graph" model="ir.ui.view">
+		<field name="name">todo_app.todo.view.graph</field>
+		<field name="model">todo_app.todo</field>
+		<field name="arch" type="xml">
+			<graph>
+				<field name="name"/>
+				<field name="is_complete"/>
+				<field name="progress"/>
+				<field name="summary"/>
+				<field name="description"/>
+			</graph>
+		</field>
+	</record>
+
+	<record id="todo_app_todo_view_activity" model="ir.ui.view">
+		<field name="name">todo_app.todo.view.activity</field>
+		<field name="model">todo_app.todo</field>
+		<field name="arch" type="xml">
+			<activity string="Todos">
+				<templates>
+					<div t-name="activity-box">
+						<div class="flex-grow-1">
+							<div class="d-flex justify-content-between">
+								<field name="name" display="full" class="o_text_block o_text_bold"/>
+								<div class="m-1"/>
+								<field name="date_deadline" display="full" muted="1"/>
+							</div>
+							<div class="d-flex justify-content-between">
+								<field name="progress" widget="progressbar"/>
+							</div>
+						</div>
+					</div>
+				</templates>
+			</activity>
+		</field>
+	</record>
+
+	<record id="todo_app_todo_view_form" model="ir.ui.view">
+		<field name="name">todo_app.todo.view.form</field>
+		<field name="model">todo_app.todo</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+
+					<label for="name"/>
+					<h1>
+						<field name="name"/>
+					</h1>
+
+					<group>
+						<group>
+							<field name="sequence"/>
+							<field name="is_complete"/>
+							<field name="progress" widget="progressbar"/>
+						</group>
+						<group>
+							<field name="date_deadline"/>
+						</group>
+						<group colspan="2">
+							<field name="summary"/>
+							<field name="description"/>
+						</group>
+					</group>
+				</sheet>
+				<chatter reload_on_post="True"/>
+			</form>
+		</field>
+	</record>
+
+	<record id="todo_app_todo_view_search" model="ir.ui.view">
+		<field name="name">todo_app.todo.view.search</field>
+		<field name="model">todo_app.todo</field>
+		<field name="arch" type="xml">
+			<search>
+				<filter name="filter_archived" string="Archived" domain="[('active', '=', False)]"/>
+				<filter name="filter_completed" string="Completed" domain="[('is_complete', '=', True)]"/>
+				<separator/>
+				<filter name="filter_date_deadline" string="Date Deadline" date="date_deadline" default_period="month"/>
+				<filter name="filter_create_date" string="Date Created" date="create_date" default_period="month"/>
+				<group>
+					<filter name="group_create_uid" string="Created By" context="{ 'group_by':'create_uid' }"/>
+					<filter name="group_date_deadline" string="Deadline" context="{ 'group_by':'date_deadline' }"/>
+				</group>
+			</search>
+		</field>
+	</record>
+
+	<record id="action_todo_app_todo_all" model="ir.actions.act_window">
+		<field name="name">All Todos</field>
+		<field name="res_model">todo_app.todo</field>
+		<field name="view_mode">kanban,list,form,calendar,graph,activity,pivot</field>
+		<field name="view_id" ref="todo_app_todo_view_kanban"/>
+	</record>
+
+	<record id="action_todo_app_todo_completed" model="ir.actions.act_window">
+		<field name="name">Completed Todos</field>
+		<field name="res_model">todo_app.todo</field>
+		<field name="view_mode">kanban,list,form,calendar,graph,activity,pivot</field>
+		<field name="view_id" ref="todo_app_todo_view_kanban"/>
+		<field name="domain">[('is_complete', '=', True)]</field>
+	</record>
+
+	<record id="action_todo_app_todo_incomplete" model="ir.actions.act_window">
+		<field name="name">Incomplete Todos</field>
+		<field name="res_model">todo_app.todo</field>
+		<field name="view_mode">kanban,list,form,calendar,graph,activity,pivot</field>
+		<field name="view_id" ref="todo_app_todo_view_kanban"/>
+		<field name="domain">[('is_complete', '=', False)]</field>
+	</record>
+</odoo>
