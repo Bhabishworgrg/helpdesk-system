@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<menuitem
+		id="menu_helpdesk_stage"
+		name="Stage"
+		parent="helpdesk_app.menu_helpdesk_config"
+		action="action_helpdesk_todo_stage"
+		sequence="5"
+	/>
+</odoo>

@@ -19,17 +19,11 @@ class HelpdeskTicket(models.Model):
     user_id = fields.Many2one('res.users', 'Reported By', default=lambda self: self.env.user)
     category_id = fields.Many2one('helpdesk_app.helpdesk_category', string='Category', default=lambda self: self.env.ref('helpdesk_app.helpdesk_category_1'))
     tag_ids = fields.Many2many('helpdesk_app.helpdesk_tag', string='Tags')
-    stage_id = fields.Many2one('helpdesk_app.helpdesk_stage', string='Stage', default=lambda self: self.env.ref('helpdesk_app.helpdesk_stage_1'))
     type_id = fields.Many2one('helpdesk_app.helpdesk_type', string='Type', default=lambda self: self.env.ref('helpdesk_app.helpdesk_type_1'))
     remark_ids = fields.One2many('helpdesk_app.helpdesk_remark', 'ticket_id', string='Remarks')
     team_id = fields.Many2one('helpdesk_app.helpdesk_team', string='Team')
     team_member_ids = fields.Many2many('res.users', string='Team Members', related='team_id.member_ids')
     team_member_id = fields.Many2one('res.users', string='Team Member', domain='[("id", "in", team_member_ids)]')
-    is_completed_or_cancelled = fields.Boolean('Is Completed or Cancelled', compute='_compute_is_completed_or_cancelled')
-
-    def _compute_is_completed_or_cancelled(self):
-        for rec in self:
-            rec.is_completed_or_cancelled = rec.stage_id in [self.env.ref('helpdesk_app.helpdesk_stage_3'), self.env.ref('helpdesk_app.helpdesk_stage_4')]
 
 #    def action_next_stage(self):
 #        next_stage = self.env['helpdesk_app.helpdesk_stage'].search([('sequence', '>', self.stage_id.sequence)], limit=1)

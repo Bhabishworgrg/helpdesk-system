@@ -42,7 +42,7 @@
 
 	<!-- Configuration -->
 	<menuitem
-		id="menu_config"
+		id="menu_todo_config"
 		name="Configuration"
 		parent="menu_todo_app"
 		sequence="2"
@@ -51,7 +51,7 @@
 	<menuitem
 		id="menu_todo_task"
 		name="Task"
-		parent="menu_config"
+		parent="menu_todo_config"
 		action="action_todo_app_todo_task"
 		sequence="1"
 	/>

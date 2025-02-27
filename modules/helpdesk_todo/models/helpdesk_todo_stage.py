@@ -1,12 +1,12 @@
-# *-* coding: utf-8 *-*
+# -*- coding: utf-8 -*-
 
-from odoo import fields, models
+from odoo import models, fields
 from odoo.exceptions import UserError
 
 
-class HelpdeskStage(models.Model):
-    _name = 'helpdesk_app.helpdesk_stage'
-    _description = 'Helpdesk Stage'
+class HelpdeskTodoStage(models.Model):
+    _name = 'helpdesk_todo.stage'
+    _description = 'Helpdesk-Todo Stage'
     _order = 'sequence asc'
 
     sequence = fields.Integer('Sequence', default=lambda self: self.search_count([]) + 1)
