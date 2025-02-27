@@ -17,3 +17,4 @@ class Todo(models.Model):
     description = fields.Html('Description')
     progress = fields.Float('Progress')
     is_complete = fields.Boolean('Is Completed')
+    user_id = fields.Many2one('res.users', string='User Assigned')
