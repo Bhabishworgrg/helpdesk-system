@@ -9,6 +9,7 @@
     ],
     'data': [
         'security/ir.model.access.csv',
+        'wizard/todo_task_complete_wizard.xml',
         'views/todo.xml',
         'views/todo_task.xml',
         'views/menus.xml',

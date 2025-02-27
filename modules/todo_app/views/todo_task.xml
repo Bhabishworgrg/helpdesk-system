@@ -7,6 +7,7 @@
 			<list>
 				<field name="sequence" widget="handle"/>
 				<field name="name"/>
+				<field name="todo_id"/>
 				<field name="date_deadline"/>
 				<field name="user_id"/>
 				<field name="is_complete"/>
@@ -19,6 +20,9 @@
 		<field name="model">todo_app.todo_task</field>
 		<field name="arch" type="xml">
 			<form>
+				<header>
+					<button name="%(todo_app.action_todo_app_todo_task_complete_wizard)d" string="Mark as Complete" type="action" class="oe_highlight"/>
+				</header>
 				<sheet>
 					<label for="name"/>
 					<h1>
@@ -26,7 +30,8 @@
 					</h1>
 
 					<group>
-						<field name="user_id" readonly="is_complete == True"/>
+						<field name="todo_id" readonly="True"/>
+						<field name="user_id" widget="many2one_avatar_user" readonly="is_complete == True"/>
 						<field name="is_complete" readonly="True"/>
 					</group>
 				</sheet>

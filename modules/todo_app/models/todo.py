@@ -18,3 +18,4 @@ class Todo(models.Model):
     progress = fields.Float('Progress')
     is_complete = fields.Boolean('Is Completed')
     user_id = fields.Many2one('res.users', string='User Assigned')
+    task_ids = fields.One2many('todo_app.todo_task', 'todo_id', string='Tasks')
