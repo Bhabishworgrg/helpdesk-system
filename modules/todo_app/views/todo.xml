@@ -136,6 +136,7 @@
 											<button name="%(todo_app.action_todo_app_todo_task_complete_wizard)d" type="action" string="Mark as Complete" class="oe_highlight"/>
 										</header>
 										<group class="pt-3">
+											<field name="todo_id" invisible="True"/>
 											<field name="name" readonly="is_complete == True"/>
 											<field name="date_deadline"/>
 											<field name="user_id" widget="many2one_avatar_user" readonly="is_complete == True"/>

@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 todo_app.access_todo_app_todo,access_todo_app_todo,todo_app.model_todo_app_todo,base.group_user,1,1,1,1
 todo_app.access_todo_app_todo_task,access_todo_app_todo_task,todo_app.model_todo_app_todo_task,base.group_user,1,1,1,1
+todo_app.access_todo_app_todo_task_complete_wizard,access_todo_app_todo_task_complete_wizard,todo_app.model_todo_app_todo_task_complete_wizard,base.group_user,1,1,1,1
