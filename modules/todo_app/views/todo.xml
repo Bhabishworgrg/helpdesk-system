@@ -129,9 +129,7 @@
 									<field name="user_id" widget="many2one_avatar_user"/>
 									<field name="is_complete"/>
 									<field name="remark"/>
-									<group string="Mark as Complete">
-										<button name="%(todo_app.action_todo_app_todo_task_complete_wizard)d" type="action" string="Mark as Complete" class="oe_highlight" invisible="is_complete"/>
-									</group>
+									<button name="%(todo_app.action_todo_app_todo_task_complete_wizard)d" type="action" string="Mark as Complete" class="oe_highlight" invisible="is_complete"/>
 								</list>
 								<form>
 									<sheet>
