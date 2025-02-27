@@ -10,6 +10,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/todo.xml',
+        'views/todo_task.xml',
         'views/menus.xml',
     ],
     'installable': True,

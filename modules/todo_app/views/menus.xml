@@ -39,4 +39,20 @@
 		action="action_todo_app_todo_incomplete"
 		sequence="3"
 	/>
+
+	<!-- Configuration -->
+	<menuitem
+		id="menu_config"
+		name="Configuration"
+		parent="menu_todo_app"
+		sequence="2"
+	/>
+	
+	<menuitem
+		id="menu_todo_task"
+		name="Todo Task"
+		parent="menu_config"
+		action="action_todo_app_todo_task"
+		sequence="1"
+	/>
 </odoo>
