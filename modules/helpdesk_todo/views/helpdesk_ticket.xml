@@ -1,88 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
-        <record id="crm_case_form_view_oppor" model="ir.ui.view">
-            <field name="name">crm.lead.oppor.inherited.crm</field>
-            <field name="model">crm.lead</field>
-            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//button[@name='action_set_won_rainbowman']" position="before">
-                    <button string="New Quotation" name="action_sale_quotations_new" type="object" class="oe_highlight" data-hotkey="q"
-                        title="Create new quotation"
-                        invisible="type == 'lead' or probability == 0 and not active"/>
-                </xpath>
-                <button name="action_set_won_rainbowman" position="attributes">
-                    <attribute name="class" remove="oe_highlight"/>
-                </button>
-                <button name="action_schedule_meeting" position="after">
-                    <button class="oe_stat_button" type="object"
-                        name="action_view_sale_quotation" icon="fa-pencil-square-o" invisible="type == 'lead'">
-                        <field name="quotation_count" widget="statinfo" string="Quotations"/>
-                    </button>
-                    <button class="oe_stat_button" type="object" invisible="sale_order_count == 0 or type == 'lead'"
-                        name="action_view_sale_order" icon="fa-usd">
-                        <div class="o_field_widget o_stat_info">
-                            <span class="o_stat_value"><field name="sale_amount_total" widget="monetary" options="{'currency_field': 'company_currency'}"/></span>
-                            <span class="o_stat_text"> Orders</span>
-                            <field name="sale_order_count" invisible="1"/>
-                        </div>
-                    </button>
-                </button>
-            </field>
-        </record>
-		
 	<record id="helpdesk_todo_helpdesk_ticket_view_form" model="ir.ui.view">
 		<field name="name">helpdesk_todo.helpdesk_ticket.view.form</field>
 		<field name="model">helpdesk_app.helpdesk_ticket</field>
-		<field name="inherit_id" ref="helpdesk_app.helpdesk_app"/>
+		<field name="inherit_id" ref="helpdesk_app.helpdesk_app_helpdesk_ticket_view_form"/>
 		<field name="arch" type="xml">
-			<form>
-				<header>
-					<button name="%(helpdesk_app.action_helpdesk_app_helpdesk_ticket_send_wizard)d" string="Send Ticket" type="action" class="btn-primary"/>
-					<button name="%(helpdesk_app.action_helpdesk_app_helpdesk_ticket_cancel_wizard)d" string="Cancel" type="action" class="btn-secondary"/>
-					<button name="%(helpdesk_app.action_helpdesk_app_helpdesk_ticket_restore_wizard)d" string="Restore" type="action" class="btn-secondary"/>
-				</header>
-				<sheet>
-					<widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
-
-					<label for="title"/>
-					<h1>
-						<field name="title"/>
-					</h1>
-
-					<group>
-						<group>
-							<field name="reported_date" readonly="True"/>
-							<field name="user_id" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True }" widget="many2one_avatar"/>
-							<field name="team_id" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True }"/>
-							<field name="team_member_id" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True }"/>
-						</group>
-						<group>
-							<field name="type_id" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True }" readonly="True"/>
-							<field name="category_id" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True }"/>
-							<field name="tag_ids" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True, 'color_field': 'color' }" widget="many2many_tags"/>
-						</group>
-						<group colspan="2">
-							<field name="query"/>
-							<field name="description"/>
-						</group>
-					</group>
-
-					<notebook>
-						<page string="Remarks" name="helpdesk_remarks">
-							<field name="remark_ids" readonly="True">
-								<list>
-									<field name="date_time"/>
-									<field name="remark"/>
-									<field name="document"/>
-								</list>
-							</field>
-						</page>
-					</notebook>
-				</sheet>
-				<chatter reload_on_post="True"/>
-			</form>
+			<xpath expr="//form/header" position="inside">
+				<field name="stage_id" widget="statusbar"/>
+			</xpath>
 		</field>
 	</record>
 </odoo>
-

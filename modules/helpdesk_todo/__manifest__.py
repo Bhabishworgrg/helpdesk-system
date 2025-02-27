@@ -10,8 +10,11 @@
     ],
     'data': [
         'security/ir.model.access.csv',
+        'wizard/helpdesk_todo_todo_next_stage_wizard.xml',
         'views/stages.xml',
+        'views/helpdesk_ticket.xml',
         'views/helpdesk_menus.xml',
+        'views/todo.xml',
         'views/todo_menus.xml',
     ],
     'installable': True,

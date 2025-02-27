@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="helpdesk_todo_todo_view_form" model="ir.ui.view">
+		<field name="name">helpdesk_todo.todo.view.form</field>
+		<field name="model">todo_app.todo</field>
+		<field name="inherit_id" ref="todo_app.todo_app_todo_view_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//form//sheet" position="before">
+				<header>
+					<button name="%(helpdesk_todo.action_helpdesk_todo_todo_next_stage_wizard)d" string="Next Stage" type="action" class="btn-primary"/>
+					<field name="stage_id" widget="statusbar" options="{ 'clickable': True }"/>
+				</header>
+			</xpath>
+		</field>
+	</record>
+</odoo>
