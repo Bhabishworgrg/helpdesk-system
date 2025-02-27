@@ -128,17 +128,20 @@
 									<field name="date_deadline"/>
 									<field name="user_id" widget="many2one_avatar_user"/>
 									<field name="is_complete"/>
-									<button name="%(todo_app.action_todo_app_todo_task_complete_wizard)d" type="action" string="Mark as Complete" class="oe_highlight"/>
+									<field name="remark"/>
+									<group string="Mark as Complete">
+										<button name="%(todo_app.action_todo_app_todo_task_complete_wizard)d" type="action" string="Mark as Complete" class="oe_highlight" invisible="is_complete"/>
+									</group>
 								</list>
 								<form>
 									<sheet>
 										<header>
-											<button name="%(todo_app.action_todo_app_todo_task_complete_wizard)d" type="action" string="Mark as Complete" class="oe_highlight"/>
+											<button name="%(todo_app.action_todo_app_todo_task_complete_wizard)d" type="action" string="Mark as Complete" class="oe_highlight" invisible="is_complete"/>
 										</header>
-										<group class="pt-3">
+										<group class="pt-2">
 											<field name="todo_id" invisible="True"/>
 											<field name="name" readonly="is_complete == True"/>
-											<field name="date_deadline"/>
+											<field name="date_deadline" readonly="is_complete == True"/>
 											<field name="user_id" widget="many2one_avatar_user" readonly="is_complete == True"/>
 										</group>
 									</sheet>
