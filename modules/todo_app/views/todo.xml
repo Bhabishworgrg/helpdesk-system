@@ -4,16 +4,21 @@
 		<field name="name">todo_app.todo.view.kanban</field>
 		<field name="model">todo_app.todo</field>
 		<field name="arch" type="xml">
-			<kanban class="o_kanban_mobile"> 
+			<kanban class="o_kanban_mobile">
 				<templates>
 					<t t-name="card">
 						<main>
-							<field name="name" class="fw-bold"/>
-							<field name="summary"/>
+							<div class="d-flex justify-content-between align-items-center mt-auto">
+								<field name="name" class="fw-bold me-auto"/>
+								<field name="is_complete" widget="boolean_toggle" class="oe_kanban_action"/>
+							</div>
+							<field name="date_deadline" widget="remaining_days"/>
 						</main>
-						<footer class="pt-1 mt-0">
-							<div class="d-flex mt-auto">
-								<field name="date_deadline" widget="remaining_days"/>
+						<footer class="pt-3">
+							<field name="progress" widget="progressbar"/>
+							<div class="d-flex ms-auto">
+								<field name="activity_ids" widget="kanban_activity"/>
+								<field name="user_id" widget="many2one_avatar_user"/>
 							</div>
 						</footer>
 					</t>
