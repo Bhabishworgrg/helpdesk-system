@@ -4,7 +4,7 @@ from odoo import models, fields
 
 
 class TodoNextStageWizard(models.TransientModel):
-    _name = 'helpdesk_todo.todo_next_stage_wizard'
+    _name = 'todo_app.todo_next_stage_wizard'
     _description = 'Todo Next Stage Wizard'
 
     user_id = fields.Many2one('res.users', string='User Responsible')

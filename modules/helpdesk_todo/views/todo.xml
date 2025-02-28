@@ -5,11 +5,8 @@
 		<field name="model">todo_app.todo</field>
 		<field name="inherit_id" ref="todo_app.todo_app_todo_view_form"/>
 		<field name="arch" type="xml">
-			<xpath expr="//form//sheet" position="before">
-				<header>
-					<button name="%(helpdesk_todo.action_helpdesk_todo_todo_next_stage_wizard)d" string="Next Stage" type="action" class="btn-primary"/>
-					<field name="stage_id" widget="statusbar" options="{ 'clickable': True }"/>
-				</header>
+			<xpath expr="//form/header" position="inside">
+				<field name="stage_id" widget="statusbar" options="{ 'clickable': True }"/>
 			</xpath>
 		</field>
 	</record>

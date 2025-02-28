@@ -96,6 +96,9 @@
 		<field name="model">todo_app.todo</field>
 		<field name="arch" type="xml">
 			<form>
+				<header>
+					<button name="%(todo_app.action_todo_app_todo_next_stage_wizard)d" string="Next Stage" type="action" class="btn-primary"/>
+				</header>
 				<sheet>
 					<widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
 					<div class="oe_title">

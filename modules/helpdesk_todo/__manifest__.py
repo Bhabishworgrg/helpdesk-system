@@ -11,7 +11,6 @@
     'data': [
         'security/ir.model.access.csv',
         'data/stage_data.xml',
-        'wizard/helpdesk_todo_todo_next_stage_wizard.xml',
         'wizard/helpdesk_todo_helpdesk_ticket_send_wizard.xml',
         'views/stages.xml',
         'views/helpdesk_ticket.xml',
