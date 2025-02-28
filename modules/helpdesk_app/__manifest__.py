@@ -12,7 +12,6 @@
         'data/helpdesk_category_data.xml',
         'data/helpdesk_tag_data.xml',
         'data/helpdesk_type_data.xml',
-        'wizard/helpdesk_ticket_send_wizard.xml',
         'wizard/helpdesk_ticket_cancel_wizard.xml',
         'wizard/helpdesk_ticket_restore_wizard.xml',
         'views/helpdesk_ticket.xml',

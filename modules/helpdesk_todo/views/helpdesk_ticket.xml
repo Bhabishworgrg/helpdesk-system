@@ -6,6 +6,7 @@
 		<field name="inherit_id" ref="helpdesk_app.helpdesk_app_helpdesk_ticket_view_form"/>
 		<field name="arch" type="xml">
 			<xpath expr="//form/header" position="inside">
+				<button name="%(helpdesk_todo.action_helpdesk_todo_helpdesk_ticket_send_wizard)d" string="Send Ticket" type="action" class="btn-primary"/>
 				<field name="stage_id" widget="statusbar"/>
 			</xpath>
 		</field>

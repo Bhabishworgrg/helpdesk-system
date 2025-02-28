@@ -22,7 +22,6 @@
 		<field name="arch" type="xml">
 			<form>
 				<header>
-					<button name="%(helpdesk_app.action_helpdesk_app_helpdesk_ticket_send_wizard)d" string="Send Ticket" type="action" class="btn-primary"/>
 					<button name="%(helpdesk_app.action_helpdesk_app_helpdesk_ticket_cancel_wizard)d" string="Cancel" type="action" class="btn-secondary"/>
 					<button name="%(helpdesk_app.action_helpdesk_app_helpdesk_ticket_restore_wizard)d" string="Restore" type="action" class="btn-secondary"/>
 				</header>

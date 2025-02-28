@@ -8,7 +8,7 @@ class HelpdeskRemark(models.Model):
     _description = 'Helpdesk Remark'
     _order = 'date_time desc'
 
-    ticket_id = fields.Many2one('helpdesk_app.helpdesk_ticket', string='Ticket', required=True)
+    ticket_id = fields.Many2one('helpdesk_app.helpdesk_ticket', string='Ticket', required=True, ondelete='cascade')
     remark = fields.Text('Remark')
     document = fields.Binary('Document')
     date_time = fields.Datetime('Date Time')
