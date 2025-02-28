@@ -5,10 +5,16 @@
 		<field name="model">helpdesk_app.helpdesk_ticket</field>
 		<field name="inherit_id" ref="helpdesk_app.helpdesk_app_helpdesk_ticket_view_form"/>
 		<field name="arch" type="xml">
-			<xpath expr="//form/header" position="inside">
+			<xpath expr="//form/header/button" position="before">
 				<button name="%(helpdesk_todo.action_helpdesk_todo_helpdesk_ticket_send_wizard)d" string="Send Ticket" type="action" class="btn-primary"/>
 				<field name="stage_id" widget="statusbar"/>
 			</xpath>
+			<button name="%(helpdesk_app.action_helpdesk_app_helpdesk_ticket_restore_wizard)d" position="attributes">
+				<attribute name="class">btn-secondary</attribute>
+			</button>
+			<button name="%(helpdesk_app.action_helpdesk_app_helpdesk_ticket_cancel_wizard)d" position="attributes">
+				<attribute name="class">btn-secondary</attribute>
+			</button>
 		</field>
 	</record>
 </odoo>
