@@ -11,9 +11,11 @@
 			</xpath>
 			<button name="%(helpdesk_app.action_helpdesk_app_helpdesk_ticket_restore_wizard)d" position="attributes">
 				<attribute name="class">btn-secondary</attribute>
+				<attribute name="invisible">not is_completed_or_cancelled</attribute>
 			</button>
 			<button name="%(helpdesk_app.action_helpdesk_app_helpdesk_ticket_cancel_wizard)d" position="attributes">
 				<attribute name="class">btn-secondary</attribute>
+				<attribute name="invisible">is_completed_or_cancelled</attribute>
 			</button>
 		</field>
 	</record>
