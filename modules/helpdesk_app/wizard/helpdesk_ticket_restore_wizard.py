@@ -13,7 +13,6 @@ class HelpdeskTicketRestoreWizard(models.TransientModel):
     remark_id = fields.Many2one('helpdesk_app.helpdesk_remark', string='Remark')
 
     def action_confirm(self):
-        #self.ticket_id.stage_id = self.env['helpdesk_app.helpdesk_stage'].search([('sequence', '=', 1)])
         self.remark_id = self.env['helpdesk_app.helpdesk_remark'].create({
             'ticket_id': self.ticket_id.id,
             'remark': self.remark,

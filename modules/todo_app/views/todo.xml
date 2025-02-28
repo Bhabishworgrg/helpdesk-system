@@ -149,6 +149,15 @@
 								</form>
 							</field>
 						</page>
+						<page string="Remarks" name="todo_remarks">
+							<field name="remark_ids" readonly="True">
+								<list>
+									<field name="date_time"/>
+									<field name="remark"/>
+									<field name="document"/>
+								</list>
+							</field>
+						</page>
 					</notebook>
 				</sheet>
 
