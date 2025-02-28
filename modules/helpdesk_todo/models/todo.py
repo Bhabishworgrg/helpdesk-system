@@ -6,7 +6,7 @@ from odoo import fields, models
 class Todo(models.Model):
     _inherit = 'todo_app.todo'
 
-    stage_id = fields.Many2one('helpdesk_todo.stage', string='Stage')
+    stage_id = fields.Many2one('helpdesk_todo.stage', string='Stage', default=lambda self: self.env['helpdesk_todo.stage'].search([('sequence', '=', 1)]))
     ticket_id = fields.Many2one('helpdesk_app.helpdesk_ticket', string='Ticket')
 
     def write(self, vals):

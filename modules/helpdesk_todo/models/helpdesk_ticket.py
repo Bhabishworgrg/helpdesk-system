@@ -6,6 +6,7 @@ from odoo import fields, models, api
 class HelpdeskTicket(models.Model):
     _inherit = 'helpdesk_app.helpdesk_ticket'
 
+    todo_id = fields.One2many('todo_app.todo', 'ticket_id', string='Todo')
     stage_id = fields.Many2one('helpdesk_todo.stage', string='Stage', default=lambda self: self.env['helpdesk_todo.stage'].search([('sequence', '=', 1)]))
     is_completed_or_cancelled = fields.Boolean(string='Is Completed Stage', compute='_compute_is_completed_or_cancelled')
 
