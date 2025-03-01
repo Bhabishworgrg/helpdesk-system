@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields
+from odoo import models, fields, api
 
 
 class HelpdeskTicketSendWizard(models.TransientModel):
@@ -12,6 +12,9 @@ class HelpdeskTicketSendWizard(models.TransientModel):
     remark = fields.Text('Remarks', required=True)
     remark_id = fields.Many2one('helpdesk_app.helpdesk_remark', string='Remark')
     todo_id = fields.Many2one('todo_app.todo', string='Todo')
+    ticket_title = fields.Char('Title')
+    ticket_query =  fields.Text('Query')
+    ticket_description = fields.Html('Description')
 
     def action_confirm(self):
         self.remark_id = self.env['helpdesk_app.helpdesk_remark'].create({
@@ -21,12 +24,12 @@ class HelpdeskTicketSendWizard(models.TransientModel):
         })
 
         todo = self.env['todo_app.todo'].create({
-            'name': self.ticket_id.title,
-            'user_id': self.ticket_id.team_member_id.id,
-            'summary': self.ticket_id.query,
-            'description': self.ticket_id.description,
+            'name': self.ticket_title,
+            'summary': self.ticket_query,
+            'description': self.ticket_description,
         })
         self.todo_id = todo.id
+        
         return {
             'name': 'Todo',
             'view_mode': 'form',
@@ -35,3 +38,21 @@ class HelpdeskTicketSendWizard(models.TransientModel):
             'res_id': todo.id,
             'target': 'current',
         }
+
+    @api.model
+    def default_get(self, fields_list):
+        defaults = super().default_get(fields_list)
+        
+        # Get the active ticket from the context
+        active_id = self.env.context.get('active_id')
+        active_model = self.env.context.get('active_model')
+        
+        if active_id and active_model:
+            ticket = self.env[active_model].browse(active_id)
+            defaults.update({
+                'ticket_id': ticket.id,
+                'ticket_title': ticket.title,
+                'ticket_query': ticket.query,
+                'ticket_description': ticket.description,
+            })
+        return defaults

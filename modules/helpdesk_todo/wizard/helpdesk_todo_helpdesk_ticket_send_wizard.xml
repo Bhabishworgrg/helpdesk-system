@@ -6,8 +6,11 @@
         <field name="arch" type="xml">
 			<form string="Send Ticket">
 				<field name="ticket_id" invisible="1"></field>
-                <group>
-                    <field name="remark"/>
+				<group>
+					<field name="ticket_title"/>
+					<field name="ticket_query"/>
+					<field name="ticket_description"/>
+					<field name="remark"/>
                 </group>
                 <footer>
                     <button name="action_confirm" type="object" string="Confirm" class="oe_highlight"/>
@@ -20,7 +23,7 @@
     <record id="action_helpdesk_todo_helpdesk_ticket_send_wizard" model="ir.actions.act_window">
         <field name="name">Send Ticket</field>
         <field name="res_model">helpdesk_todo.helpdesk_ticket_send_wizard</field>
-        <field name="view_mode">form</field>
+		<field name="view_mode">form</field>
 		<field name="context">{ 'default_ticket_id': active_id }</field>
         <field name="target">new</field>
     </record>
