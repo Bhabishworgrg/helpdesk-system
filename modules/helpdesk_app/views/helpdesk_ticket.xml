@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+	<record id="helpdesk_app_helpdesk_ticket_view_kanban" model="ir.ui.view">
+		<field name="name">helpdesk_app.helpdesk_ticket.view.kanban</field>
+		<field name="model">helpdesk_app.helpdesk_ticket</field>
+		<field name="arch" type="xml">
+			<kanban class="o_kanban_mobile">
+				<templates>
+					<t t-name="card">
+						<main>
+							<div class="d-flex justify-content-between align-items-center mt-auto">
+								<field name="title" class="fw-bold me-auto"/>
+								<field name="reported_date" widget="remaining_days"/>
+							</div>
+							<code><field name="category_id"/></code>
+						</main>
+						<footer class="pt-3">
+							<field name="tag_ids" widget="many2many_tags" options="{ 'color_field': 'color' }"/>
+							<div class="d-flex ms-auto">
+								<field name="user_id" widget="many2one_avatar_user"/>
+							</div>
+						</footer>
+					</t>
+				</templates>
+			</kanban>
+		</field>
+	</record>
+	
 	<record id="helpdesk_app_helpdesk_ticket_view_list" model="ir.ui.view">
 		<field name="name">helpdesk_app.helpdesk_ticket.view.list</field>
 		<field name="model">helpdesk_app.helpdesk_ticket</field>
@@ -8,10 +34,11 @@
 				<field name="sequence" widget="handle"/>
 				<field name="user_id" widget="many2one_avatar"/>
 				<field name="title"/>
-				<field name="category_id"/>
-				<field name="query" optional="1"/>
+				<field name="category_id" optional="False"/>
 				<field name="reported_date"/>
 				<field name="tag_ids" widget="many2many_tags" options="{ 'color_field': 'color' }"/>
+				<field name="team_id" optional="False"/>
+				<field name="team_member_id" widget="many2one_avatar"/>
 			</list>
 		</field>
 	</record>
@@ -38,7 +65,7 @@
 							<field name="reported_date" readonly="True"/>
 							<field name="user_id" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True }" widget="many2one_avatar"/>
 							<field name="team_id" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True }"/>
-							<field name="team_member_id" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True }"/>
+							<field name="team_member_id" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True }" widget="many2one_avatar"/>
 						</group>
 						<group>
 							<field name="type_id" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True }" readonly="True"/>
@@ -88,7 +115,7 @@
 	<record id="action_helpdesk_app_helpdesk_ticket_all" model="ir.actions.act_window">
 		<field name="name">All Tickets</field>
 		<field name="res_model">helpdesk_app.helpdesk_ticket</field>
-		<field name="view_mode">list,form</field>
+		<field name="view_mode">kanban,list,form</field>
 		<field name="context">
 			{
 				'search_default_filter_my_tickets' : 1,
@@ -99,7 +126,7 @@
 	<record id="action_helpdesk_app_helpdesk_ticket_completed" model="ir.actions.act_window">
 		<field name="name">Completed Tickets</field>
 		<field name="res_model">helpdesk_app.helpdesk_ticket</field>
-		<field name="view_mode">list,form</field>
+		<field name="view_mode">kanban,list,form</field>
 		<field name="context">
 			{
 				'search_default_filter_my_tickets' : 1,
@@ -110,7 +137,7 @@
 	<record id="action_helpdesk_app_helpdesk_ticket_incomplete" model="ir.actions.act_window">
 		<field name="name">Incomplete Tickets</field>
 		<field name="res_model">helpdesk_app.helpdesk_ticket</field>
-		<field name="view_mode">list,form</field>
+		<field name="view_mode">kanban,list,form</field>
 		<field name="context">
 			{
 				'search_default_filter_my_tickets' : 1,
