@@ -10,4 +10,47 @@
 			</xpath>
 		</field>
 	</record>
+
+	<record id="helpdesk_todo_todo_view_search" model="ir.ui.view">
+		<field name="name">helpdesk_todo.todo.view.search</field>
+		<field name="model">todo_app.todo</field>
+		<field name="inherit_id" ref="todo_app.todo_app_todo_view_search"/>
+		<field name="arch" type="xml">
+			<xpath expr="//search/filter[@name='filter_create_date']" position="after">
+				<separator/>
+				<filter name="filter_my_todos" string="My Todos" domain="[('create_uid', '=', uid)]"/>
+			</xpath>
+			<xpath expr="//search/group" position="inside">
+				<separator/>
+				<filter name="group_stage_id" string="Stages" context="{ 'group_by':'stage_id' }"/>
+			</xpath>
+		</field>
+	</record>
+	
+	<record id="todo_app.action_todo_app_todo_all" model="ir.actions.act_window">
+		<field name="context">
+			{
+				'search_default_group_stage_id': 1,
+				'search_default_filter_my_todos' : 1,
+			}
+		</field>
+	</record>
+
+	<record id="todo_app.action_todo_app_todo_completed" model="ir.actions.act_window">
+		<field name="context">
+			{
+				'search_default_group_stage_id': 1,
+				'search_default_filter_my_todos' : 1,
+			}
+		</field>
+	</record>
+
+	<record id="todo_app.action_todo_app_todo_incomplete" model="ir.actions.act_window">
+		<field name="context">
+			{
+				'search_default_group_stage_id': 1,
+				'search_default_filter_my_todos' : 1,
+			}
+		</field>
+	</record>
 </odoo>

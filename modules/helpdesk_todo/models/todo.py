@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from odoo import fields, models
+from odoo import fields, models, api
 
 
 class Todo(models.Model):
     _inherit = 'todo_app.todo'
 
-    stage_id = fields.Many2one('helpdesk_todo.stage', string='Stage', default=lambda self: self.env['helpdesk_todo.stage'].search([('sequence', '=', 1)]))
+    stage_id = fields.Many2one('helpdesk_todo.stage', string='Stage', default=lambda self: self.env['helpdesk_todo.stage'].search([('sequence', '=', 1)]), group_expand='_read_group_stage_id')
     ticket_id = fields.Many2one('helpdesk_app.helpdesk_ticket', string='Ticket')
 
     def write(self, vals):
@@ -15,3 +15,7 @@ class Todo(models.Model):
                 'stage_id': vals['stage_id']
             })
         return super().write(vals)
+    
+    @api.model
+    def _read_group_stage_id(self, records, domain, order=None):
+        return records.search([])
