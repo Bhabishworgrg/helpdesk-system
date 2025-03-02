@@ -21,9 +21,15 @@ class HelpdeskTicket(models.Model):
     tag_ids = fields.Many2many('helpdesk_app.helpdesk_tag', string='Tags', tracking=True)
     type_id = fields.Many2one('helpdesk_app.helpdesk_type', string='Type', default=lambda self: self.env.ref('helpdesk_app.helpdesk_type_1'))
     remark_ids = fields.One2many('helpdesk_app.helpdesk_remark', 'ticket_id', string='Remarks')
-    team_id = fields.Many2one('helpdesk_app.helpdesk_team', string='Team', tracking=True)
+    team_ids = fields.Many2many('helpdesk_app.helpdesk_team', string='Teams', compute='_compute_team_ids')
+    team_id = fields.Many2one('helpdesk_app.helpdesk_team', string='Team', domain="[('id', 'in', team_ids)]", tracking=True)
     team_member_ids = fields.Many2many('res.users', string='Team Members', compute='_compute_team_member_ids')
-    team_member_id = fields.Many2one('res.users', string='Team Member', domain='[("id", "in", team_member_ids)]')
+    team_member_id = fields.Many2one('res.users', string='Team Member', domain='[("id", "in", team_member_ids)]', tracking=True)
+
+    @api.depends('team_member_id')
+    def _compute_team_ids(self):
+        for rec in self:
+            rec.team_ids = self.env['helpdesk_app.helpdesk_team'].search([('member_ids', 'in', rec.team_member_id.ids)] if rec.team_member_id else [])
 
     @api.depends('team_id')
     def _compute_team_member_ids(self):
