@@ -17,7 +17,8 @@
 								</p>
 								<section>
 									<div class="container">
-										<form t-attf-action="/support/submit?csrf_token=#{request.csrf_token()}" method="post">
+										<form t-attf-action="/support/submit" method="post">
+												<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
 											<div class="form-group mb-3 col-12">
 												<label style="width: 200px" for="name">
 													<span>Name *</span>
