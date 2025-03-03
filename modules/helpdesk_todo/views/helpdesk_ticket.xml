@@ -19,4 +19,40 @@
 			</button>
 		</field>
 	</record>
+	
+	<record id="helpdesk_todo_helpdesk_ticket_view_search" model="ir.ui.view">
+		<field name="name">helpdesk_todo.helpdesk_ticket.view.search</field>
+		<field name="model">helpdesk_app.helpdesk_ticket</field>
+		<field name="inherit_id" ref="helpdesk_app.helpdesk_app_helpdesk_ticket_view_search"/>
+		<field name="arch" type="xml">
+			<xpath expr="//search/group" position="inside">
+				<separator/>
+				<filter name="group_stage_id" string="Stages" context="{ 'group_by':'stage_id' }"/>
+			</xpath>
+		</field>
+	</record>
+	
+	<record id="helpdesk_app.action_helpdesk_app_helpdesk_ticket_all" model="ir.actions.act_window">
+		<field name="context">
+			{
+				'search_default_group_stage_id': 1,
+			}
+		</field>
+	</record>
+
+	<record id="helpdesk_app.action_helpdesk_app_helpdesk_ticket_completed" model="ir.actions.act_window">
+		<field name="context">
+			{
+				'search_default_group_stage_id': 1,
+			}
+		</field>
+	</record>
+
+	<record id="helpdesk_app.action_helpdesk_app_helpdesk_ticket_incomplete" model="ir.actions.act_window">
+		<field name="context">
+			{
+				'search_default_group_stage_id': 1,
+			}
+		</field>
+	</record>
 </odoo>
