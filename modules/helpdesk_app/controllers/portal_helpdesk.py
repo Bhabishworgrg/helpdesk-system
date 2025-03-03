@@ -1,5 +1,8 @@
+# -*- coding: utf-8 -*-
+
 from odoo import http
 from odoo.http import request
+
 
 class PortalHelpdesk(http.Controller):
     @http.route('/support', type='http', auth='public', website=True)
@@ -11,9 +14,10 @@ class PortalHelpdesk(http.Controller):
         if post:
             request.env['helpdesk_app.helpdesk_ticket'].create(
                 {
-                    'title': post.get('title'),
+                    'title': post.get('subject'),
                     'query': post.get('query'),
                     'description': post.get('description'),
+                    'type_id': request.env.ref('helpdesk_app.helpdesk_type_2').id,
                 }
             )
             return request.render('helpdesk_app.portal_support_ticket_received_template', {})
