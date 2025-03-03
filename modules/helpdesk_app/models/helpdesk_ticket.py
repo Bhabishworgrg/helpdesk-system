@@ -16,7 +16,6 @@ class HelpdeskTicket(models.Model):
     query = fields.Text('Query', required=True, tracking=True)
     description = fields.Html('Description')
     reported_date = fields.Date('Reported Date', default=fields.Date.today)
-    user_id = fields.Many2one('res.users', 'Reported By', default=lambda self: self.env.user, tracking=True)
     category_id = fields.Many2one('helpdesk_app.helpdesk_category', string='Category', default=lambda self: self.env.ref('helpdesk_app.helpdesk_category_1'), tracking=True)
     tag_ids = fields.Many2many('helpdesk_app.helpdesk_tag', string='Tags', tracking=True)
     type_id = fields.Many2one('helpdesk_app.helpdesk_type', string='Type', default=lambda self: self.env.ref('helpdesk_app.helpdesk_type_1'))
@@ -25,6 +24,7 @@ class HelpdeskTicket(models.Model):
     team_id = fields.Many2one('helpdesk_app.helpdesk_team', string='Team', domain="[('id', 'in', team_ids)]", tracking=True)
     team_member_ids = fields.Many2many('res.users', string='Team Members', compute='_compute_team_member_ids')
     team_member_id = fields.Many2one('res.users', string='Team Member', domain='[("id", "in", team_member_ids)]', tracking=True)
+    partner_id = fields.Many2one('res.partner', string="Contact")
 
     @api.depends('team_member_id')
     def _compute_team_ids(self):

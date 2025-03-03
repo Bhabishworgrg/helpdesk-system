@@ -7,7 +7,6 @@ class HelpdeskTicketRestoreWizard(models.TransientModel):
     _name = 'helpdesk_app.helpdesk_ticket_restore_wizard'
     _description = 'Helpdesk Ticket Restore Wizard'
 
-    user_id = fields.Many2one('res.users', string='User Responsible')
     ticket_id = fields.Many2one('helpdesk_app.helpdesk_ticket', string='Helpdesk Ticket', required=True)
     remark = fields.Text('Remarks', required=True)
     remark_id = fields.Many2one('helpdesk_app.helpdesk_remark', string='Remark')

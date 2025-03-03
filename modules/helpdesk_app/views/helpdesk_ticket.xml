@@ -17,7 +17,7 @@
 						<footer class="pt-3">
 							<field name="tag_ids" widget="many2many_tags" options="{ 'color_field': 'color' }"/>
 							<div class="d-flex ms-auto">
-								<field name="user_id" widget="many2one_avatar_user"/>
+								<field name="partner_id" widget="many2one_avatar_user"/>
 							</div>
 						</footer>
 					</t>
@@ -32,7 +32,7 @@
 		<field name="arch" type="xml">
 			<list>
 				<field name="sequence" widget="handle"/>
-				<field name="user_id" widget="many2one_avatar"/>
+				<field name="partner_id" widget="many2one_avatar"/>
 				<field name="title"/>
 				<field name="category_id" optional="False"/>
 				<field name="reported_date"/>
@@ -63,14 +63,16 @@
 					<group>
 						<group>
 							<field name="reported_date" readonly="True"/>
-							<field name="user_id" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True }" widget="many2one_avatar"/>
+							<field name="category_id" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True }"/>
+							<field name="tag_ids" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True, 'color_field': 'color' }" widget="many2many_tags"/>
 							<field name="team_id" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True }"/>
 							<field name="team_member_id" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True }" widget="many2one_avatar"/>
 						</group>
 						<group>
 							<field name="type_id" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True }" readonly="True"/>
-							<field name="category_id" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True }"/>
-							<field name="tag_ids" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True, 'color_field': 'color' }" widget="many2many_tags"/>
+							<field name="partner_id" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True }" widget="many2one_avatar"/>
+							<field name="email"/>
+							<field name="phone"/>
 						</group>
 						<group colspan="2">
 							<field name="query"/>
@@ -100,7 +102,7 @@
 		<field name="model">helpdesk_app.helpdesk_ticket</field>
 		<field name="arch" type="xml">
 			<search>
-				<filter name="filter_my_tickets" string="My Tickets" domain="[('user_id', '=', uid)]"/>
+				<filter name="filter_my_tickets" string="My Tickets" domain="[('partner_id.user_id.id', '=', uid)]"/>
 				<filter name="filter_archived" string="Archived" domain="[('active', '=', False)]"/>
 				<separator/>
 				<filter name="filter_reported_date" string="Reported Date" date="reported_date"/>
