@@ -171,6 +171,7 @@
 		<field name="model">todo_app.todo</field>
 		<field name="arch" type="xml">
 			<search>
+				<filter name="filter_my_todos" string="My Todos" domain="[('create_uid', '=', uid)]"/>
 				<filter name="filter_archived" string="Archived" domain="[('active', '=', False)]"/>
 				<filter name="filter_completed" string="Completed" domain="[('is_complete', '=', True)]"/>
 				<separator/>
@@ -189,6 +190,11 @@
 		<field name="res_model">todo_app.todo</field>
 		<field name="view_mode">kanban,list,form,calendar,graph,activity</field>
 		<field name="view_id" ref="todo_app_todo_view_kanban"/>
+		<field name="context">
+			{
+				'search_default_filter_my_todos' : 1,
+			}
+		</field>
 	</record>
 
 	<record id="action_todo_app_todo_completed" model="ir.actions.act_window">
@@ -196,6 +202,11 @@
 		<field name="res_model">todo_app.todo</field>
 		<field name="view_mode">kanban,list,form,calendar,graph,activity</field>
 		<field name="view_id" ref="todo_app_todo_view_kanban"/>
+		<field name="context">
+			{
+				'search_default_filter_my_todos' : 1,
+			}
+		</field>
 		<field name="domain">[('is_complete', '=', True)]</field>
 	</record>
 
@@ -204,6 +215,11 @@
 		<field name="res_model">todo_app.todo</field>
 		<field name="view_mode">kanban,list,form,calendar,graph,activity</field>
 		<field name="view_id" ref="todo_app_todo_view_kanban"/>
+		<field name="context">
+			{
+				'search_default_filter_my_todos' : 1,
+			}
+		</field>
 		<field name="domain">[('is_complete', '=', False)]</field>
 	</record>
 </odoo>
