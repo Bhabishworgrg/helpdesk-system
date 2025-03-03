@@ -4,7 +4,7 @@
 		<field name="name">todo_app.todo.view.kanban</field>
 		<field name="model">todo_app.todo</field>
 		<field name="arch" type="xml">
-			<kanban class="o_kanban_mobile">
+			<kanban class="o_kanban_mobile" records_draggable="False">
 				<templates>
 					<t t-name="card">
 						<main>
