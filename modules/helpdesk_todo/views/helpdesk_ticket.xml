@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+	<record id="helpdesk_todo_helpdesk_ticket_view_kanban" model="ir.ui.view">
+		<field name="name">helpdesk_todo.helpdesk_ticket.view.kanban</field>
+		<field name="model">helpdesk_app.helpdesk_ticket</field>
+		<field name="inherit_id" ref="helpdesk_app.helpdesk_app_helpdesk_ticket_view_kanban"/>
+		<field name="arch" type="xml">
+			<kanban position="attributes">
+				<attribute name="records_draggable">False</attribute>
+			</kanban>
+		</field>
+	</record>
+	
 	<record id="helpdesk_todo_helpdesk_ticket_view_form" model="ir.ui.view">
 		<field name="name">helpdesk_todo.helpdesk_ticket.view.form</field>
 		<field name="model">helpdesk_app.helpdesk_ticket</field>
