@@ -24,9 +24,10 @@ class HelpdeskTicket(models.Model):
     team_id = fields.Many2one('helpdesk_app.helpdesk_team', string='Team', domain="[('id', 'in', team_ids)]", tracking=True)
     team_member_ids = fields.Many2many('res.users', string='Team Members', compute='_compute_team_member_ids')
     team_member_id = fields.Many2one('res.users', string='Team Member', domain='[("id", "in", team_member_ids)]', tracking=True)
-    partner_id = fields.Many2one('res.partner', string="Contact")
-    email = fields.Char(string="Email", compute='_compute_email')
-    phone = fields.Char(string="Phone", compute='_compute_phone')
+    partner_id = fields.Many2one('res.partner', string='Contact', compute='_compute_partner', readonly=False, store=True)
+    name = fields.Char(string='Name')
+    email = fields.Char(string='Email')
+    phone = fields.Char(string='Phone')
 
     @api.depends('team_member_id')
     def _compute_team_ids(self):
@@ -38,12 +39,25 @@ class HelpdeskTicket(models.Model):
         for rec in self:
             rec.team_member_ids = rec.team_id.member_ids if rec.team_id else self.env['res.users'].search([])
 
-    @api.depends('partner_id')
-    def _compute_email(self):
+    @api.depends('email', 'phone')
+    def _compute_partner(self):
         for rec in self:
-            rec.email = rec.partner_id.email
+            if not rec.env.context.get('from_onchange'):
+                rec.partner_id = self.env['res.partner'].search([
+                    ('email', '=', rec.email),
+                    ('phone', '=', rec.phone)
+                ], limit=1)
 
-    @api.depends('partner_id')
-    def _compute_phone(self):
+    @api.onchange('partner_id')
+    def _onchange_partner_id(self):
         for rec in self:
-            rec.phone = rec.partner_id.phone
+            if rec.partner_id:
+                rec.with_context(from_onchange=True).write({
+                    'email': rec.partner_id.email,
+                    'phone': rec.partner_id.phone,
+                })
+            else:
+                rec.with_context(from_onchange=True).write({
+                    'email': False,
+                    'phone': False,
+                })

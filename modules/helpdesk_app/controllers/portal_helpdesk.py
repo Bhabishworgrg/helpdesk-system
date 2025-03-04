@@ -14,6 +14,7 @@ class PortalHelpdesk(http.Controller):
         if post:
             request.env['helpdesk_app.helpdesk_ticket'].create(
                 {
+                    'name': post.get('name'),
                     'email': post.get('email'),
                     'phone': post.get('phone'),
                     'title': post.get('subject'),
