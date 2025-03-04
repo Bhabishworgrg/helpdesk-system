@@ -9,6 +9,7 @@
         'website',
     ],
     'data': [
+        'security/ir_rules.xml',
         'security/ir.model.access.csv',
         'data/helpdesk_category_data.xml',
         'data/helpdesk_tag_data.xml',
