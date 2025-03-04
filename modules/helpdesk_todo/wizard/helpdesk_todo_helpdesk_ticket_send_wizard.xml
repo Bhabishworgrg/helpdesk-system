@@ -8,6 +8,7 @@
 				<field name="ticket_id" invisible="1"></field>
 				<group>
 					<field name="ticket_title"/>
+					<field name="ticket_team_member_id" widget="many2one_avatar"/>
 					<field name="ticket_query"/>
 					<field name="ticket_description"/>
 					<field name="remark"/>
