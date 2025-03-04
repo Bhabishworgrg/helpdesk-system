@@ -46,6 +46,7 @@
 		name="Configuration"
 		parent="menu_helpdesk_app"
 		sequence="2"
+		groups="helpdesk_app.group_helpdesk_admin,base.group_system,base.group_erp_manager"
 	/>
 	
 	<menuitem
