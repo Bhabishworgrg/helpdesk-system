@@ -3,17 +3,16 @@
 from odoo import models, fields, api
 
 
-class HelpdeskTicketSendWizard(models.TransientModel):
-    _name = 'helpdesk_todo.helpdesk_ticket_send_wizard'
-    _description = 'Helpdesk Ticket Send Wizard'
+class CRMLeadCreateWizard(models.TransientModel):
+    _name = 'helpdesk_crm.crm_lead_create_wizard'
+    _description = 'CRM Lead Create Wizard'
 
     ticket_id = fields.Many2one('helpdesk_app.helpdesk_ticket', string='Helpdesk Ticket', required=True)
     remark = fields.Text('Remarks', required=True)
     remark_id = fields.Many2one('helpdesk_app.helpdesk_remark', string='Remark')
-    todo_id = fields.Many2one('todo_app.todo', string='Todo')
-    ticket_title = fields.Char('Title')
-    ticket_query =  fields.Text('Query')
-    ticket_description = fields.Html('Description')
+    lead_id = fields.Many2one('crm.lead', string='Lead')
+    title = fields.Char('Title', required=True)
+    partner_id = fields.Many2one('res.partner', string='Contact')
 
     def action_confirm(self):
         self.remark_id = self.env['helpdesk_app.helpdesk_remark'].create({
@@ -22,19 +21,18 @@ class HelpdeskTicketSendWizard(models.TransientModel):
             'date_time': fields.Datetime.now(),
         })
 
-        todo = self.env['todo_app.todo'].create({
-            'name': self.ticket_title,
-            'summary': self.ticket_query,
-            'description': self.ticket_description,
+        lead = self.env['crm.lead'].create({
+            'name': self.title,
+            'partner_id': self.partner_id.id,
         })
-        self.todo_id = todo.id
+        self.lead_id = lead.id
         
         return {
-            'name': 'Todo',
+            'name': 'Lead',
             'view_mode': 'form',
-            'res_model': 'todo_app.todo',
+            'res_model': 'crm.lead',
             'type': 'ir.actions.act_window',
-            'res_id': todo.id,
+            'res_id': lead.id,
             'target': 'current',
         }
 
@@ -49,9 +47,7 @@ class HelpdeskTicketSendWizard(models.TransientModel):
         if active_id and active_model:
             ticket = self.env[active_model].browse(active_id)
             defaults.update({
-                'ticket_id': ticket.id,
-                'ticket_title': ticket.title,
-                'ticket_query': ticket.query,
-                'ticket_description': ticket.description,
+                'title': ticket.title,
+                'partner_id': ticket.partner_id.id,
             })
         return defaults

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="helpdesk_crm_helpdesk_ticket_view_form" model="ir.ui.view">
+		<field name="name">helpdesk_crm.helpdesk_ticket.view.form</field>
+		<field name="model">helpdesk_app.helpdesk_ticket</field>
+		<field name="inherit_id" ref="helpdesk_app.helpdesk_app_helpdesk_ticket_view_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//form/header/button" position="before">
+				<button name="%(helpdesk_crm.action_helpdesk_crm_crm_lead_create_wizard)d" string="Create CRM" type="action" class="btn-primary" invisible="type_id == 1"/>
+			</xpath>
+			<button name="%(helpdesk_app.action_helpdesk_app_helpdesk_ticket_restore_wizard)d" position="attributes">
+				<attribute name="class">btn-secondary</attribute>
+			</button>
+			<button name="%(helpdesk_app.action_helpdesk_app_helpdesk_ticket_cancel_wizard)d" position="attributes">
+				<attribute name="class">btn-secondary</attribute>
+			</button>
+		</field>
+	</record>
+</odoo>
