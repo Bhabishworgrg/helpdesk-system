@@ -22,10 +22,10 @@
 		</record>
 
 		<record id="group_todo_manager" model="res.groups">
-			<field name="name">Manager: All Todos</field>
+			<field name="name">Manager: Team's Todos</field>
 			<field name="category_id" ref="category_todo_app_roles"/>
 			<field name="implied_ids" eval="[(4, ref('group_todo_user'))]"/>
-			<field name="comment">The user will have access to all todos of everyone in the todo application.</field>
+			<field name="comment">The user will have access to todos of everyone in their team in the todo application.</field>
 		</record>
 
 		<record id="group_todo_admin" model="res.groups">
