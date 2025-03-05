@@ -15,6 +15,7 @@ class HelpdeskTicketSendWizard(models.TransientModel):
     ticket_query =  fields.Text('Query')
     ticket_description = fields.Html('Description')
     ticket_team_member_id = fields.Many2one('res.users', string='Team Member Assigned')
+    ticket_leader_id = fields.Many2one('res.users', string='Team Leader')
 
     def action_confirm(self):
         self.remark_id = self.env['helpdesk_app.helpdesk_remark'].create({
@@ -26,6 +27,7 @@ class HelpdeskTicketSendWizard(models.TransientModel):
         todo = self.env['todo_app.todo'].create({
             'name': self.ticket_title,
             'user_id': self.ticket_team_member_id.id,
+            'leader_id': self.ticket_leader_id.id,
             'summary': self.ticket_query,
             'description': self.ticket_description,
         })
@@ -54,6 +56,7 @@ class HelpdeskTicketSendWizard(models.TransientModel):
                 'ticket_id': ticket.id,
                 'ticket_title': ticket.title,
                 'ticket_team_member_id': ticket.team_member_id.id,
+                'ticket_leader_id': ticket.team_id.leader_id.id,
                 'ticket_query': ticket.query,
                 'ticket_description': ticket.description,
             })

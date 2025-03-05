@@ -8,6 +8,7 @@ class Todo(models.Model):
 
     stage_id = fields.Many2one('helpdesk_todo.stage', string='Stage', default=lambda self: self.env['helpdesk_todo.stage'].search([('sequence', '=', 1)]), group_expand='_read_group_stage_id')
     ticket_id = fields.Many2one('helpdesk_app.helpdesk_ticket', string='Ticket')
+    leader_id = fields.Many2one('res.users', string='Leader')
 
     def write(self, vals):
         if 'stage_id' in vals:

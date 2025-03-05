@@ -9,6 +9,7 @@
         'todo_app',
     ],
     'data': [
+        'security/ir_rules.xml',
         'security/ir.model.access.csv',
         'data/stage_data.xml',
         'wizard/helpdesk_todo_helpdesk_ticket_send_wizard.xml',
