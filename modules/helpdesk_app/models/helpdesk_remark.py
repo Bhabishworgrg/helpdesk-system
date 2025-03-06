@@ -11,4 +11,4 @@ class HelpdeskRemark(models.Model):
     ticket_id = fields.Many2one('helpdesk_app.helpdesk_ticket', string='Ticket', required=True, ondelete='cascade')
     remark = fields.Text('Remark')
     document = fields.Binary('Document')
-    date_time = fields.Datetime('Date Time')
+    date_time = fields.Datetime('Date Time', default=fields.Datetime.now)

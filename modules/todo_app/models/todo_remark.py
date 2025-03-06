@@ -11,4 +11,4 @@ class TodoRemark(models.Model):
     todo_id = fields.Many2one('todo_app.todo', string='Todo', required=True, ondelete='cascade')
     remark = fields.Text('Remark')
     document = fields.Binary('Document')
-    date_time = fields.Datetime('Date Time')
+    date_time = fields.Datetime('Date Time', default=fields.Datetime.now)

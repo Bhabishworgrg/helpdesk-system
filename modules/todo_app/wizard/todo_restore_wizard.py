@@ -15,5 +15,4 @@ class TodoRestoreWizard(models.TransientModel):
         self.remark_id = self.env['todo_app.todo_remark'].create({
             'todo_id': self.todo_id.id,
             'remark': self.remark,
-            'date_time': fields.Datetime.now(),
         })

@@ -21,7 +21,6 @@ class HelpdeskTicketSendWizard(models.TransientModel):
         self.remark_id = self.env['helpdesk_app.helpdesk_remark'].create({
             'ticket_id': self.ticket_id.id,
             'remark': self.remark,
-            'date_time': fields.Datetime.now(),
         })
 
         todo = self.env['todo_app.todo'].create({
