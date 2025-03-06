@@ -12,14 +12,15 @@ class PortalHelpdesk(http.Controller):
     @http.route('/support/submit', type='http', auth='public', website=True)
     def portal_support_ticket_submit(self, **post):
         if post:
+            external_type = request.env.ref('helpdesk_app.helpdesk_type_2')
             request.env['helpdesk_app.helpdesk_ticket'].create(
                 {
                     'email': post.get('email'),
-                    'phone': post.get('phone'),
-                    'title': post.get('subject'),
-                    'query': post.get('query'),
-                    'description': post.get('description'),
-                    'type_id': request.env.ref('helpdesk_app.helpdesk_type_2').id,      # Set type to External
+                    'phone': post.get('phone').strip(),
+                    'title': post.get('subject').strip(),
+                    'query': post.get('query').strip(),
+                    'description': post.get('description').strip(),
+                    'type_id': external_type.id,
                 }
             )
             return request.render('helpdesk_app.portal_support_ticket_received_template', {})
