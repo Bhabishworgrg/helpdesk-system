@@ -29,3 +29,13 @@ class Todo(models.Model):
     @api.model
     def _read_group_stage_id(self, records, domain, order=None):
         return records.search([])
+
+    @api.model
+    def create(self, vals):
+        rec = super().create(vals)
+        if rec.ticket_id:
+            rec.message_post(
+                body=f'Todo {rec.name} has been assigned to {rec.user_id.partner_id.name}',
+                partner_ids=rec.leader_id.partner_id.ids
+            )
+        return rec
