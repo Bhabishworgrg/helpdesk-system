@@ -12,7 +12,7 @@ class Todo(models.Model):
 
     def write(self, vals):
         if 'stage_id' in vals:
-            self.ticket_id.write({
+            self.ticket_id.sudo().write({
                 'stage_id': vals['stage_id']
             })
         return super().write(vals)
