@@ -14,7 +14,10 @@ class HelpdeskTag(models.Model):
     color = fields.Integer('Color', required=True)
     is_prepopulated = fields.Boolean('Is Prepopulated', default=False)
 
+    _sql_constraints = [('name_unique', 'unique(name)', 'Tag name already exists.')]
+    
     def unlink(self):
-        if self.search_count([('id', 'in', self.ids), ('is_prepopulated', '=', True)]):
+        prepopulated = self.filtered(lambda rec: rec.is_prepopulated)
+        if prepopulated:
             raise UserError('You cannot delete a prepopulated tag.')
         return super().unlink()
