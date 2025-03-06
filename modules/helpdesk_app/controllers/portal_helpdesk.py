@@ -14,15 +14,13 @@ class PortalHelpdesk(http.Controller):
         if post:
             request.env['helpdesk_app.helpdesk_ticket'].create(
                 {
-                    'name': post.get('name'),
                     'email': post.get('email'),
                     'phone': post.get('phone'),
                     'title': post.get('subject'),
                     'query': post.get('query'),
                     'description': post.get('description'),
-                    'type_id': request.env.ref('helpdesk_app.helpdesk_type_2').id,
+                    'type_id': request.env.ref('helpdesk_app.helpdesk_type_2').id,      # Set type to External
                 }
             )
             return request.render('helpdesk_app.portal_support_ticket_received_template', {})
         return request.redirect('/support')
-

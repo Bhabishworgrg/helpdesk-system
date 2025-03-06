@@ -18,13 +18,7 @@
 								<section>
 									<div class="container">
 										<form t-attf-action="/support/submit" method="post">
-												<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-											<div class="form-group mb-3 col-12">
-												<label style="width: 200px" for="name">
-													<span>Name *</span>
-												</label>
-												<input id="name" type="text" class="form-control" name="name" required="True"/>
-											</div>
+											<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
 											<div class="row">
 												<div class="form-group mb-3 col-lg-6">
 													<label style="width: 200px" for="email">

@@ -25,7 +25,6 @@ class HelpdeskTicket(models.Model):
     team_member_ids = fields.Many2many('res.users', string='Team Members', compute='_compute_team_member_ids')
     team_member_id = fields.Many2one('res.users', string='Team Member', domain='[("id", "in", team_member_ids)]', tracking=True)
     partner_id = fields.Many2one('res.partner', string='Contact', compute='_compute_partner', readonly=False, store=True)
-    name = fields.Char(string='Name')
     email = fields.Char(string='Email')
     phone = fields.Char(string='Phone')
 
