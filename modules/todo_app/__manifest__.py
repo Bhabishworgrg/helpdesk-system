@@ -12,6 +12,8 @@
         'security/ir.model.access.csv',
         'wizard/todo_task_complete_wizard.xml',
         'wizard/todo_next_stage_wizard.xml',
+        'wizard/todo_restore_wizard.xml',
+        'wizard/todo_cancel_wizard.xml',
         'views/todo.xml',
         'views/todo_task.xml',
         'views/menus.xml',

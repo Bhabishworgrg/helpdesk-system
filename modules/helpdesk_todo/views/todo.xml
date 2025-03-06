@@ -8,6 +8,14 @@
 			<xpath expr="//form/header" position="inside">
 				<field name="stage_id" widget="statusbar" options="{ 'clickable': True }"/>
 			</xpath>
+			<button name="%(todo_app.action_todo_app_todo_restore_wizard)d" position="attributes">
+				<attribute name="class">btn-secondary</attribute>
+				<attribute name="invisible">not is_completed_or_cancelled</attribute>
+			</button>
+			<button name="%(todo_app.action_todo_app_todo_cancel_wizard)d" position="attributes">
+				<attribute name="class">btn-secondary</attribute>
+				<attribute name="invisible">is_completed_or_cancelled</attribute>
+			</button>
 		</field>
 	</record>
 
