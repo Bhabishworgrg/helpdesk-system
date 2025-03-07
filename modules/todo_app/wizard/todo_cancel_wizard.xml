@@ -8,6 +8,7 @@
 				<field name="todo_id" invisible="1"></field>
                 <group>
                     <field name="remark"/>
+					<field name="document"/>
                 </group>
                 <footer>
                     <button name="action_confirm" type="object" string="Confirm" class="oe_highlight"/>

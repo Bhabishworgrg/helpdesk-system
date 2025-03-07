@@ -86,7 +86,7 @@
 								<list>
 									<field name="date_time"/>
 									<field name="remark"/>
-									<field name="document"/>
+									<field name="document" widget="file"/>
 								</list>
 							</field>
 						</page>
