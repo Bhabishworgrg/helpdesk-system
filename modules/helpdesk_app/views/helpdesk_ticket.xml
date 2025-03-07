@@ -42,9 +42,72 @@
 			</list>
 		</field>
 	</record>
+	
+	<record id="helpdesk_app_helpdesk_ticket_view_calendar" model="ir.ui.view">
+		<field name="name">helpdesk_app.helpdesk_ticket.view.calendar</field>
+		<field name="model">helpdesk_app.helpdesk_ticket</field>
+		<field name="arch" type="xml">
+			<calendar create="0" mode="month" date_start="reported_date" color="team_member_id" hide_time="true" event_limit="5">
+				<field name="title"/>
+				<field name="reported_date"/>
+				<field name="team_member_id" widget="many2one_avatar"/>
+			</calendar>
+		</field>
+	</record>
 
+	<record id="helpdesk_app_helpdesk_ticket_view_graph" model="ir.ui.view">
+		<field name="name">helpdesk_app.helpdesk_ticket.view.graph,pivot</field>
+		<field name="model">helpdesk_app.helpdesk_ticket</field>
+		<field name="arch" type="xml">
+			<graph>
+				<field name="team_id"/>
+				<field name="team_member_id"/>
+				<field name="category_id"/>
+				<field name="tag_ids"/>
+				<field name="reported_date" type="row"/>
+				<field name="reported_date" type="col"/>
+				<field name="id" type="measure" operator="count"/>
+			</graph>
+		</field>
+	</record>
+
+	<record id="helpdesk_app_helpdesk_ticket_view_activity" model="ir.ui.view">
+		<field name="name">helpdesk_app.helpdesk_ticket.view.activity</field>
+		<field name="model">helpdesk_app.helpdesk_ticket</field>
+		<field name="arch" type="xml">
+			<activity string="Todos">
+				<templates>
+					<div t-name="activity-box">
+						<field name="team_member_id" widget="many2one_avatar_user"/>
+						<div class="flex-grow-1">
+							<div class="d-flex justify-content-between">
+								<field name="title" display="full" class="o_text_block o_text_bold"/>
+								<div class="m-1"/>
+								<field name="reported_date" display="full" muted="1"/>
+							</div>
+							<div class="d-flex justify-content-between">
+								<field name="category_id" display="full" class="o_text_block"/>
+								<field name="tag_ids" display="full" widget="many2many_tags" options="{ 'color_field': 'color' }"/>
+							</div>
+						</div>
+					</div>
+				</templates>
+			</activity>
+		</field>
+	</record>
+
+	<record id="helpdesk_app_helpdesk_ticket_view_pivot" model="ir.ui.view">
+		<field name="name">helpdesk_app.helpdesk_ticket.view.pivot</field>
+		<field name="model">helpdesk_app.helpdesk_ticket</field>
+		<field name="arch" type="xml">
+			<pivot>
+				<field name="reported_date" interval="day" type="col"/>
+			</pivot>
+		</field>		
+	</record>
+	
 	<record id="helpdesk_app_helpdesk_ticket_view_form" model="ir.ui.view">
-		<field name="name">helpdesk_app.helpdesk_ticket.view.form</field>
+		<field name="name">helpdesk_app.helpdesk_ticket.view.form,calendar,activity,graph,pivot</field>
 		<field name="model">helpdesk_app.helpdesk_ticket</field>
 		<field name="arch" type="xml">
 			<form>
@@ -117,7 +180,7 @@
 	<record id="action_helpdesk_app_helpdesk_ticket_all" model="ir.actions.act_window">
 		<field name="name">All Tickets</field>
 		<field name="res_model">helpdesk_app.helpdesk_ticket</field>
-		<field name="view_mode">kanban,list,form</field>
+		<field name="view_mode">kanban,list,form,calendar,activity,graph,pivot</field>
 		<field name="context">
 			{
 				'search_default_filter_my_tickets' : 1,
@@ -128,7 +191,7 @@
 	<record id="action_helpdesk_app_helpdesk_ticket_completed" model="ir.actions.act_window">
 		<field name="name">Completed Tickets</field>
 		<field name="res_model">helpdesk_app.helpdesk_ticket</field>
-		<field name="view_mode">kanban,list,form</field>
+		<field name="view_mode">kanban,list,form,calendar,activity,graph,pivot</field>
 		<field name="context">
 			{
 				'search_default_filter_my_tickets' : 1,
@@ -139,7 +202,7 @@
 	<record id="action_helpdesk_app_helpdesk_ticket_incomplete" model="ir.actions.act_window">
 		<field name="name">Incomplete Tickets</field>
 		<field name="res_model">helpdesk_app.helpdesk_ticket</field>
-		<field name="view_mode">kanban,list,form</field>
+		<field name="view_mode">kanban,list,form,calendar,activity,graph,pivot</field>
 		<field name="context">
 			{
 				'search_default_filter_my_tickets' : 1,
