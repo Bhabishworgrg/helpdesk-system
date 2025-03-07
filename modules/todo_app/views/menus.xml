@@ -46,6 +46,7 @@
 		name="Configuration"
 		parent="menu_todo_app"
 		sequence="2"
+		groups="todo_app.group_todo_admin,base.group_system,base.group_erp_manager"
 	/>
 	
 	<menuitem
