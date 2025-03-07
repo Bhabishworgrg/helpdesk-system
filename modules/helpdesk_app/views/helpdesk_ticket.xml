@@ -71,8 +71,8 @@
 						<group>
 							<field name="type_id" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True }" readonly="True"/>
 							<field name="partner_id" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True }" widget="many2one_avatar"/>
-							<field name="email"/>
-							<field name="phone"/>
+							<field name="partner_email"/>
+							<field name="partner_phone"/>
 						</group>
 						<group colspan="2">
 							<field name="query"/>

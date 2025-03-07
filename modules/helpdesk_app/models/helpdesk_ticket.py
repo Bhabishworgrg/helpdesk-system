@@ -5,7 +5,7 @@ from odoo import fields, models, api
 
 class HelpdeskTicket(models.Model):
     _name = 'helpdesk_app.helpdesk_ticket'
-    _description = 'Helpdesk'
+    _description = 'Helpdesk Ticket'
     _rec_name = 'title'
     _order = 'sequence asc'
     _inherit = ['mail.thread', 'mail.activity.mixin']
@@ -13,14 +13,32 @@ class HelpdeskTicket(models.Model):
     sequence = fields.Integer('Sequence', default=1)
     active = fields.Boolean('Active', default=True, tracking=True)
     title = fields.Char('Title', required=True, tracking=True)
-    query = fields.Text('Query', required=True, tracking=True)
+    query = fields.Text('Query', tracking=True)
     description = fields.Html('Description')
     reported_date = fields.Date('Reported Date', default=fields.Date.today)
-    category_id = fields.Many2one('helpdesk_app.helpdesk_category', string='Category', default=lambda self: self.env.ref('helpdesk_app.helpdesk_category_1'), tracking=True)
-    tag_ids = fields.Many2many('helpdesk_app.helpdesk_tag', string='Tags', tracking=True)
-    type_id = fields.Many2one('helpdesk_app.helpdesk_type', string='Type', default=lambda self: self.env.ref('helpdesk_app.helpdesk_type_1'))
-    remark_ids = fields.One2many('helpdesk_app.helpdesk_remark', 'ticket_id', string='Remarks')
 
+    category_id = fields.Many2one(
+        'helpdesk_app.helpdesk_category', 
+        string='Category', 
+        default=lambda self: self.env.ref('helpdesk_app.helpdesk_category_1'),  # Set 'General Inquiry' as default category
+        tracking=True
+    )
+    tag_ids = fields.Many2many(
+        'helpdesk_app.helpdesk_tag',
+        string='Tags',
+        tracking=True
+    )
+    type_id = fields.Many2one(
+        'helpdesk_app.helpdesk_type',
+        string='Type',
+        default=lambda self: self.env.ref('helpdesk_app.helpdesk_type_1'),      # Set 'Internal' as default type
+    )
+    remark_ids = fields.One2many(
+        'helpdesk_app.helpdesk_remark',
+        'ticket_id',
+        string='Remarks'
+    )
+    
     partner_id = fields.Many2one(
         'res.partner',
         string='Reporter',
