@@ -20,15 +20,6 @@ class HelpdeskTicket(models.Model):
     tag_ids = fields.Many2many('helpdesk_app.helpdesk_tag', string='Tags', tracking=True)
     type_id = fields.Many2one('helpdesk_app.helpdesk_type', string='Type', default=lambda self: self.env.ref('helpdesk_app.helpdesk_type_1'))
     remark_ids = fields.One2many('helpdesk_app.helpdesk_remark', 'ticket_id', string='Remarks')
-    team_ids = fields.Many2many('helpdesk_app.helpdesk_team', string='Teams', compute='_compute_team_ids')
-    team_id = fields.Many2one('helpdesk_app.helpdesk_team', string='Team', domain="[('id', 'in', team_ids)]", tracking=True)
-    team_member_ids = fields.Many2many('res.users', string='Team Members', compute='_compute_team_member_ids')
-    team_member_id = fields.Many2one('res.users', string='Team Member', domain='[("id", "in", team_member_ids)]', tracking=True)
-
-    @api.depends('team_member_id')
-    def _compute_team_ids(self):
-        for rec in self:
-            rec.team_ids = self.env['helpdesk_app.helpdesk_team'].search([('member_ids', 'in', rec.team_member_id.ids)] if rec.team_member_id else [])
 
     partner_id = fields.Many2one(
         'res.partner',
@@ -38,10 +29,39 @@ class HelpdeskTicket(models.Model):
     partner_email = fields.Char(string='Reporter Email')
     partner_phone = fields.Char(string='Reporter Phone')
     
+    team_id = fields.Many2one(
+        'helpdesk_app.helpdesk_team',
+        string='Team',
+        tracking=True
+    )
+    team_member_ids = fields.Many2many(
+        'res.users',
+        string='Team Members',
+        compute='_compute_team_member_ids',
+    )
+    team_member_id = fields.Many2one(
+        'res.users', 
+        string='Team Member',
+        domain='[("id", "in", team_member_ids)]',
+        tracking=True
+    )
+    
     @api.depends('team_id')
     def _compute_team_member_ids(self):
         for rec in self:
-            rec.team_member_ids = rec.team_id.member_ids if rec.team_id else self.env['res.users'].search([])
+            if rec.team_id:
+                rec.team_member_ids = rec.team_id.member_ids
+                if rec.team_member_id and rec.team_member_id.id not in rec.team_id.member_ids.ids:
+                    rec.team_member_id = False 
+            else:
+                rec.team_member_ids = self.env['res.users'].search([])
+                rec.team_member_id = False
+    
+    @api.onchange('team_member_id')
+    def _onchange_team_id(self):
+        for rec in self:
+            if rec.team_member_id and not rec.team_id:
+                    rec.team_id = self.env['helpdesk_app.helpdesk_team'].search([('member_ids', 'in', rec.team_member_id.id)], limit=1)
 
     @api.onchange('partner_email', 'partner_phone')
     def _onchange_partner_email_or_phone(self):
