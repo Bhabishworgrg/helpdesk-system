@@ -48,6 +48,7 @@
 				'search_default_group_stage_id': 1,
 			}
 		</field>
+		<field name="domain">[('is_complete', '=', True)]</field>
 	</record>
 
 	<record id="todo_app.action_todo_app_todo_incomplete" model="ir.actions.act_window">
@@ -56,5 +57,6 @@
 				'search_default_group_stage_id': 1,
 			}
 		</field>
+		<field name="domain">[('is_complete', '=', False)]</field>
 	</record>
 </odoo>
