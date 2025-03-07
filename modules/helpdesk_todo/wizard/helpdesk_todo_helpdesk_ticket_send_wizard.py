@@ -26,6 +26,7 @@ class HelpdeskTicketSendWizard(models.TransientModel):
         })
 
         todo = self.env['todo_app.todo'].sudo().create({
+            'ticket_id': self.ticket_id.id,
             'name': self.ticket_title,
             'user_id': self.ticket_team_member_id.id,
             'leader_id': self.ticket_leader_id.id,

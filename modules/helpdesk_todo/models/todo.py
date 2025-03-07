@@ -36,6 +36,7 @@ class Todo(models.Model):
         if rec.ticket_id:
             rec.message_post(
                 body=f'Todo {rec.name} has been assigned to {rec.user_id.partner_id.name}',
-                partner_ids=rec.leader_id.partner_id.ids
+                partner_ids=rec.leader_id.partner_id.ids,
+                subtype_xmlid="mail.mt_note"
             )
         return rec
