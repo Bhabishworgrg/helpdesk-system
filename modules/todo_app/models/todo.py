@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import fields, models, api
+from odoo.exceptions import UserError
 
 
 class Todo(models.Model):
@@ -30,3 +31,15 @@ class Todo(models.Model):
             else:
                 rec.is_complete = False
                 rec.progress = 0
+
+    @api.onchange('date_deadline')
+    def _onchange_date_deadline(self):
+        today = fields.Date.today()
+        if self.date_deadline and self.date_deadline < today:
+            self.date_deadline = today
+            return {
+                'warning': {
+                    'title': 'Warning',
+                    'message': 'Deadline cannot be set to a date in the past',
+                }
+            }
