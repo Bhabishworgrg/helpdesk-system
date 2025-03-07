@@ -15,8 +15,8 @@ class PortalHelpdesk(http.Controller):
             external_type = request.env.ref('helpdesk_app.helpdesk_type_2')
             request.env['helpdesk_app.helpdesk_ticket'].create(
                 {
-                    'email': post.get('email'),
-                    'phone': post.get('phone').strip(),
+                    'partner_email': post.get('email'),
+                    'partner_phone': post.get('phone').strip(),
                     'title': post.get('subject').strip(),
                     'query': post.get('query').strip(),
                     'description': post.get('description').strip(),

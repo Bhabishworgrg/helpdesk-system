@@ -103,3 +103,15 @@ class HelpdeskTicket(models.Model):
             else:
                 rec.partner_email = False
                 rec.partner_phone = False
+
+    @api.model
+    def create(self, vals):
+        rec = super().create(vals)
+        if rec.type_id == rec.env.ref('helpdesk_app.helpdesk_type_2'):
+            rec.sudo().message_post(
+                body=f'I have a query: {rec.query}',
+                partner_ids=rec.env.ref('helpdesk_app.group_helpdesk_manager').sudo().users.mapped('partner_id').ids,
+                subtype_xmlid='mail.mt_note',
+                email_from=rec.partner_email
+            )
+        return rec
