@@ -2,6 +2,7 @@
 
 from odoo import fields, models, api
 from odoo.exceptions import UserError
+from datetime import timedelta
 
 
 class Todo(models.Model):
@@ -43,3 +44,14 @@ class Todo(models.Model):
                     'message': 'Deadline cannot be set to a date in the past',
                 }
             }
+    
+    @api.model
+    def _notify_date_deadline(self):
+        date_today = fields.Date.today()
+        date_after_2_days = date_today + timedelta(days=2)
+        todos = self.search([('date_deadline', '<', date_after_2_days), ('date_deadline', '>=', date_today)])
+        for rec in todos:
+            rec.message_post(
+                body='Todo project is about to expire.',
+                partner_ids=rec.user_id.partner_id.ids
+            )
