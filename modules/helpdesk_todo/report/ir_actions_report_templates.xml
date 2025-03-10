@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<template id="template_helpdesk_report">
+		<t t-call="web.html_container">
+			<t t-call="web.external_layout">
+				<div class="page">
+					<div class="oe_structure"/>
+					
+					<t t-set="layout_document_title">
+						Helpdesk Ticket Report
+					</t>
+
+					<div class="row mb-4">
+						<div class="col">
+							<strong>From: </strong>
+							<span t-esc="from_date"/>
+						</div>
+						<div class="col">
+							<strong>To: </strong>
+							<span t-esc="to_date"/>
+						</div>
+						<div class="col">
+							<strong>Total Tickets: </strong>
+							<span t-esc="total_tickets"/>
+						</div>
+					</div>
+
+					<table style="width: 100%" class="mb-4 table table-bordered">
+						<thead>
+							<tr>
+								<th>Stage</th>
+								<th>Count</th>
+							</tr>
+						</thead>
+						<tbody>
+							<t t-foreach="stage_counts.items()" t-as="stage">
+								<tr>
+									<td><span t-esc="stage[0]"/></td>
+									<td><span t-esc="stage[1]"/></td>
+								</tr>
+							</t>
+						</tbody>
+					</table>
+
+					<table style="width: 100%" class="mb-4 table table-bordered">
+						<thead>
+							<tr>
+								<th>Ticket</th>
+								<th>Stage</th>
+								<th>Reported Date</th>
+								<th>Category</th>
+								<th>Reported By</th>
+								<th>Assigned To</th>
+							</tr>
+						</thead>
+						<tbody>
+							<t t-foreach="tickets" t-as="ticket">
+								<tr>
+									<td><span t-esc="ticket['title']"/></td>
+									<td><span t-esc="ticket['stage_id'][1]"/></td>
+									<td><span t-esc="ticket['reported_date']"/></td>
+									<td><span t-esc="ticket['category_id'][1]"/></td>
+									<td><span t-esc="ticket['partner_id'][1]"/></td>
+									<td><span t-esc="ticket['team_member_id'][1]"/></td>
+								</tr>
+							</t>
+						</tbody>
+					</table>
+				</div>
+			</t>
+		</t>
+	</template>
+
+	<record id="action_helpdesk_report" model="ir.actions.report">
+		<field name="name">Helpdesk Report</field>
+		<field name="model">helpdesk_app.helpdesk_ticket</field>
+		<field name="report_type">qweb-pdf</field>
+		<field name="report_name">helpdesk_todo.template_helpdesk_report</field>
+		<field name="report_file">helpdesk_todo.template_helpdesk_report</field>
+		<field name="print_report_name">'Helpdesk_Report_' + str(from_date) + '_to_' + str(to_date)</field>
+		<field name="binding_model_id" ref="model_helpdesk_app_helpdesk_ticket"/>
+		<field name="binding_type">report</field>
+	</record>
+</odoo>

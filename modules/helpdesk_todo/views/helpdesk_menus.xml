@@ -7,4 +7,12 @@
 		action="action_helpdesk_todo_stage"
 		sequence="5"
 	/>
+
+	<menuitem
+		id="menu_helpdesk_report"
+		name="Report"
+		parent="helpdesk_app.menu_helpdesk_app"
+		action="action_helpdesk_todo_helpdesk_report"
+		sequence="2"
+	/>
 </odoo>
