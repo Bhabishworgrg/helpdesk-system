@@ -18,6 +18,7 @@
         'views/todo.xml',
         'views/todo_task.xml',
         'views/menus.xml',
+        'views/res_config_settings.xml',
     ],
     'installable': True,
     'application': True,

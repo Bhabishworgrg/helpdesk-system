@@ -48,10 +48,11 @@ class Todo(models.Model):
     @api.model
     def _notify_date_deadline(self):
         date_today = fields.Date.today()
-        date_after_2_days = date_today + timedelta(days=2)
-        todos = self.search([('date_deadline', '<', date_after_2_days), ('date_deadline', '>=', date_today)])
+        notify_days_before = int(self.env['ir.config_parameter'].sudo().get_param('todo_app.todo_notify_days_before'))
+        date_after_days = date_today + timedelta(days=notify_days_before)
+        todos = self.search([('date_deadline', '<=', date_after_days), ('date_deadline', '>=', date_today)])
         for rec in todos:
             rec.message_post(
-                body='Todo project is about to expire.',
+                body=f'Todo {rec.name} is about to expire.',
                 partner_ids=rec.user_id.partner_id.ids
             )
