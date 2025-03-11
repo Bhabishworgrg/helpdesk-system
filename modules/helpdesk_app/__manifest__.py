@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 {
-    'name': 'Helpdesk System',
+    'name': 'Helpdesk App',
+    'icon': '/helpdesk_app/static/description/helpdesk.png',
     'version': '0.1',
     'depends': [
         'base_setup',
