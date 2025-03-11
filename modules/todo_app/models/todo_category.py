@@ -17,5 +17,5 @@ class TodoCategory(models.Model):
     def unlink(self):
         prepopulated = self.filtered(lambda rec: rec.is_prepopulated)
         if prepopulated:
-            raise UserError('You cannot delete a prepopulated tag.')
+            raise UserError('You cannot delete a prepopulated category.')
         return super().unlink()
