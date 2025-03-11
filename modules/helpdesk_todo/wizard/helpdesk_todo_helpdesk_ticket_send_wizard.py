@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
+from odoo.exceptions import UserError
 
 
 class HelpdeskTicketSendWizard(models.TransientModel):
@@ -63,3 +64,10 @@ class HelpdeskTicketSendWizard(models.TransientModel):
                 'ticket_description': ticket.description,
             })
         return defaults
+
+    @api.model
+    def create(self, vals):
+        ticket = self.env['helpdesk_app.helpdesk_ticket'].browse(vals.get('ticket_id'))
+        if ticket.team_id and ticket.team_member_id:
+            return super().create(vals)
+        raise UserError('Please assign a team and a team member before sending the ticket.')
