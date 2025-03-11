@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="portal_todo_home" inherit_id="portal.portal_my_home">
+		<xpath expr="//div[@id='portal_common_category']" position="inside">
+			<t t-call="portal.portal_docs_entry">
+				<t t-set="title">Your Todos</t>
+				<t t-set="url" t-value="'/my/todo'"/>
+				<t t-set="text">View your todos</t>
+				<t t-set="config_card" t-value="True"/>
+				<t t-set="placeholder_count" t-value="'todos_count'"/>
+			</t>
+		</xpath>
+	</template>
+	
+	<template id="portal_my_todos" name="My Todos">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Your Todos</t>
+            </t>
+            <t t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>
+                            <span class='d-none d-md-inline'>Todos</span>
+                        </th>
+                        <th class="text-end">Date Deadline</th>
+                    </tr>
+                </thead>
+                <t t-foreach="todos" t-as="todo">
+                    <tr>
+                        <td><a t-att-href="todo.get_portal_url()"><t t-out="todo.name"/></a></td>
+                        <td class="text-end">
+                            <span t-field="todo.date_deadline" t-options="{'widget': 'date'}"/>&amp;nbsp;
+                        </td>
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+	
+	<template id="portal_todo_page" name="View Todo">
+    <t t-call="portal.portal_layout">
+        <h2 t-out="todo.name"/>
+        <p><strong>Date Deadline:</strong> <span t-field="todo.date_deadline"/></p>
+        <p><strong>Category:</strong> <span t-field="todo.category_id.name"/></p>
+        <p><strong>Summary:</strong> <span t-field="todo.summary"/></p>
+        <p><strong>Description:</strong> <span t-field="todo.description"/></p>
+		<p><strong>Progress:</strong> <span t-field="todo.progress" t-options="{'widget': 'progressbar'}"/></p>
+    </t>
+</template>
+</odoo>
+

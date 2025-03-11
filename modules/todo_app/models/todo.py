@@ -126,3 +126,6 @@ class Todo(models.Model):
                 'mark_so_as_sent': True,
             }
         }
+    
+    def get_portal_url(self):
+        return f'/my/todo/{self.id}'
