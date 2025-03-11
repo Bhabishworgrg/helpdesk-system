@@ -27,7 +27,7 @@ class TemplateTasks(models.Model):
     _description = 'Template Tasks'
     _order = 'id desc'
 
-    task_template_id = fields.Many2one('todo_app.task_template', string='Task Template', required=True)
+    task_template_id = fields.Many2one('todo_app.task_template', string='Todo Template', required=True)
     sequence = fields.Integer('Sequence', default=1)
     name = fields.Char('Name', required=True)
     summary = fields.Text('Summary')

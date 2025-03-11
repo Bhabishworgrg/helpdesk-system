@@ -72,4 +72,12 @@
 		action="action_todo_app_todo_category"
 		sequence="3"
 	/>
+
+	<menuitem
+		id="menu_todo_template"
+		name="Template"
+		parent="menu_todo_config"
+		action="action_todo_app_todo_template"
+		sequence="4"
+	/>
 </odoo>
