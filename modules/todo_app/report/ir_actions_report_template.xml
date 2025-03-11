@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="report_todo_document">
+		<t t-call="web.external_layout">
+		<t t-set="doc" t-value="doc.with_context(lang=doc.user_id.partner_id.lang or 'en_US')" />
+			<div class="page">
+				<div class="oe_structure"/>
+
+				<t t-set="layout_document_title">
+					<span t-field="doc.name"/>
+				</t>
+
+				<div class="row mb-4">
+					<div class="col">
+						<strong>Category</strong>
+						<div t-field="doc.category_id.name"/>
+					</div>
+					
+					<div class="col">
+						<strong>Assigned To</strong>
+						<div t-field="doc.user_id.name"/>
+					</div>
+					<div class="col">
+						<strong>Due Date</strong>
+						<div t-field="doc.date_deadline"/>
+					</div>
+				</div>
+				
+				<div class="row mb-4">
+					<div class="col">
+						<strong>Stage</strong>
+						<div t-field="doc.stage_id"/>
+					</div>
+					<div class="col">
+						<strong>Progress</strong>
+						<div t-field="doc.progress" t-options="{'widget': 'progressbar'}"/>
+					</div>
+				</div>
+
+				<div>
+					<strong>Summary</strong>
+					<p t-field="doc.summary"/>
+				</div>
+				
+				<div>
+					<strong>Description</strong>
+					<p t-field="doc.description"/>
+				</div>
+
+				<div>
+					<strong>Tasks</strong>
+					<ul>
+						<t t-foreach="doc.task_ids" t-as="task">
+							<li>
+								<strong><span t-field="task.name"/></strong> - Due on 
+								<span t-field="task.date_deadline" t-options='{"widget": "date"}'/>
+							</li>
+						</t>
+					</ul>
+				</div>
+
+				<div class="oe_structure"></div>
+			</div>
+		</t>
+	</template>
+
+	<template id="report_todo_raw">
+		<t t-call="web.html_container">
+			<t t-foreach="docs" t-as="doc">
+				<t t-call="todo_app.report_todo_document" t-lang="doc.partner_id.lang"/>
+			</t>
+		</t>
+	</template>
+
+	<template id="report_todo">
+		<t t-call="todo_app.report_todo_raw"/>
+	</template>
+</odoo>
+

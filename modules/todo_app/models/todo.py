@@ -46,6 +46,11 @@ class Todo(models.Model):
         string='Todo Template',
         tracking=True
     )
+    partner_id = fields.Many2one(
+        'res.partner',
+        related='user_id.partner_id',
+        string='Partner'
+    )
 
     _sql_constraints = [('name_unique', 'unique(name)', 'Todo name already exists.')]
 
@@ -101,3 +106,23 @@ class Todo(models.Model):
                 body=f'Todo {rec.name} is about to expire.',
                 partner_ids=rec.user_id.partner_id.ids
             )
+    
+    def action_compose_email(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Send Todo Email',
+            'res_model': 'mail.compose.message',
+            'view_mode': 'form',
+            'views': [(False, 'form')],
+            'view_id': False,
+            'target': 'new',
+            'context': {
+                'default_model': 'todo_app.todo',
+                'default_res_ids': self.ids,
+                'default_composition_mode': 'comment',
+                'default_email_layout_xmlid': 'mail.mail_notification_layout_with_responsible_signature',
+                'default_template_id': self.env.ref('todo_app.todo_email_template').id,
+                'email_notification_allow_footer': True,
+                'mark_so_as_sent': True,
+            }
+        }

@@ -97,6 +97,7 @@
 		<field name="arch" type="xml">
 			<form>
 				<header>
+                	<button name="action_compose_email" string="Send Email" type="object" class="btn-primary"/>
 					<button name="%(todo_app.action_todo_app_todo_next_stage_wizard)d" string="Next Stage" type="action" class="btn-primary"/>
 					<button name="%(todo_app.action_todo_app_todo_restore_wizard)d" string="Restore" type="action" class="btn-primary"/>
 					<button name="%(todo_app.action_todo_app_todo_cancel_wizard)d" string="Cancel" type="action" class="btn-primary"/>

@@ -10,9 +10,12 @@
     'data': [
         'security/ir_rules.xml',
         'security/ir.model.access.csv',
+        'report/ir_actions_report_template.xml',
+        'report/ir_actions_report.xml',
         'data/ir_cron.xml',
         'data/todo_category_data.xml',
         'data/todo_template_data.xml',
+        'data/todo_email_template_data.xml',
         'wizard/todo_task_complete_wizard.xml',
         'wizard/todo_next_stage_wizard.xml',
         'wizard/todo_restore_wizard.xml',

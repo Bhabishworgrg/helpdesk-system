@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_todo" model="ir.actions.report">
+        <field name="name">Todo</field>
+        <field name="model">todo_app.todo</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">todo_app.report_todo</field>
+        <field name="report_file">todo_app.report_todo</field>
+        <field name="print_report_name">object.name</field>
+        <field name="binding_model_id" ref="model_todo_app_todo"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
