@@ -19,9 +19,28 @@ class Todo(models.Model):
     description = fields.Html('Description')
     progress = fields.Float('Progress', compute='_compute_is_complete', store=True)
     is_complete = fields.Boolean('Is Completed', compute='_compute_is_complete', store=True)
-    user_id = fields.Many2one('res.users', string='User Assigned', tracking=True)
-    task_ids = fields.One2many('todo_app.todo_task', 'todo_id', string='Tasks', tracking=True)
-    remark_ids = fields.One2many('todo_app.todo_remark', 'todo_id', string='Remarks')
+    user_id = fields.Many2one(
+        'res.users',
+        string='User Assigned',
+        tracking=True
+    )
+    task_ids = fields.One2many(
+        'todo_app.todo_task',
+        'todo_id',
+        string='Tasks',
+        tracking=True
+    )
+    remark_ids = fields.One2many(
+        'todo_app.todo_remark',
+        'todo_id',
+        string='Remarks'
+    )
+    category_id = fields.Many2one(
+        'todo_app.todo_category',
+        string='Category',
+        ondelete='set null',
+        tracking=True
+    )
     
     _sql_constraints = [('name_unique', 'unique(name)', 'Todo name already exists.')]
 
