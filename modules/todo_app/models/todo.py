@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import fields, models, api
+from odoo import fields, models, api, Command
 from odoo.exceptions import UserError
 from datetime import timedelta
 
@@ -47,7 +47,6 @@ class Todo(models.Model):
         tracking=True
     )
 
-    
     _sql_constraints = [('name_unique', 'unique(name)', 'Todo name already exists.')]
 
     @api.depends('task_ids', 'task_ids.is_complete')
@@ -72,11 +71,30 @@ class Todo(models.Model):
                 }
             }
     
+    @api.onchange('todo_template_id')
+    def _onchange_todo_template_id(self):
+        if self.todo_template_id:
+            self.task_ids = [Command.clear()]
+            sequence = 1
+            tasks_data = []
+            for task in self.todo_template_id.task_ids:
+                tasks_data.append(
+                    Command.create({
+                        'sequence': sequence,
+                        'name': task.name,
+                        'summary': task.summary,
+                        'date_deadline': fields.Date.today() + timedelta(days=task.days_deadline),
+                    })
+                )
+                sequence += 1
+            self.task_ids = tasks_data
+    
     @api.model
     def _notify_date_deadline(self):
         date_today = fields.Date.today()
         notify_days_before = int(self.env['ir.config_parameter'].sudo().get_param('todo_app.todo_notify_days_before'))
         date_after_days = date_today + timedelta(days=notify_days_before)
+        
         todos = self.search([('date_deadline', '<=', date_after_days), ('date_deadline', '>=', date_today)])
         for rec in todos:
             rec.message_post(

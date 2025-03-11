@@ -10,6 +10,7 @@ class TodoTask(models.Model):
 
     sequence = fields.Integer('Sequence')
     name = fields.Char('Name', required=True)
+    summary = fields.Text('Summary')
     date_deadline = fields.Date('Date Deadline')
     is_complete = fields.Boolean('Is Completed', default=False)
     user_id = fields.Many2one('res.users', string='User Assigned')
