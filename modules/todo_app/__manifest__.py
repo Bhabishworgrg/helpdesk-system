@@ -11,6 +11,7 @@
         'security/ir_rules.xml',
         'security/ir.model.access.csv',
         'data/ir_cron.xml',
+        'data/todo_category_data.xml',
         'wizard/todo_task_complete_wizard.xml',
         'wizard/todo_next_stage_wizard.xml',
         'wizard/todo_restore_wizard.xml',

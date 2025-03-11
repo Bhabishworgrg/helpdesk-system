@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="0">
+		<record model="todo_app.todo_category" id="todo_category_1" forcecreate="False">
+			<field name="name">IT</field>
+			<field name="description">This category will be used for IT related projects.</field>
+			<field name="is_prepopulated">True</field>
+		</record>
+		<record model="todo_app.todo_category" id="todo_category_2" forcecreate="False">
+			<field name="name">Sales</field>
+			<field name="description">This category will be used for Sales related projects.</field>
+			<field name="is_prepopulated">True</field>
+		</record>
+		<record model="todo_app.todo_category" id="todo_category_3" forcecreate="False">
+			<field name="name">Operations</field>
+			<field name="description">This category will be used for Operations related projects.</field>
+			<field name="is_prepopulated">True</field>
+		</record>
+	</data>
+</odoo>
+
