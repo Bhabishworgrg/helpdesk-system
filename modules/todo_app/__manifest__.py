@@ -6,6 +6,8 @@
     'depends': [
         'base_setup',
         'mail',
+        'portal',
+        'website',
     ],
     'data': [
         'security/ir_rules.xml',
