@@ -41,6 +41,12 @@ class Todo(models.Model):
         ondelete='set null',
         tracking=True
     )
+    todo_template_id = fields.Many2one(
+        'todo_app.todo_template',
+        string='Todo Template',
+        tracking=True
+    )
+
     
     _sql_constraints = [('name_unique', 'unique(name)', 'Todo name already exists.')]
 

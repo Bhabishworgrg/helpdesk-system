@@ -119,6 +119,7 @@
 						<group>
 							<field name="is_complete"/>
 							<field name="progress" widget="progressbar"/>
+							<field name="todo_template_id" options="{ 'no_open': True, 'no_create': True, 'no_create_edit': True }"/>
 						</group>
 						<group colspan="2">
 							<field name="summary"/>
