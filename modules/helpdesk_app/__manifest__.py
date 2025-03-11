@@ -17,6 +17,7 @@
         'wizard/helpdesk_ticket_cancel_wizard.xml',
         'wizard/helpdesk_ticket_restore_wizard.xml',
         'views/portal_templates.xml',
+        'views/website_templates.xml',
         'views/helpdesk_ticket.xml',
         'views/helpdesk_category.xml',
         'views/helpdesk_tag.xml',
