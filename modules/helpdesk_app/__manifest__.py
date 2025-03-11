@@ -3,7 +3,7 @@
 {
     'name': 'Helpdesk App',
     'icon': '/helpdesk_app/static/description/helpdesk.png',
-    'version': '0.1',
+    'author': 'Bhabishwor Gurung',
     'depends': [
         'base_setup',
         'mail',

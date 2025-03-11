@@ -2,7 +2,7 @@
 
 {
     'name': 'Ticket to Todo',
-    'version': '0.1',
+    'author': 'Bhabishwor Gurung',
     'category': 'Hidden',
     'depends': [
         'helpdesk_app',

@@ -3,7 +3,7 @@
 {
     'name': 'Todo App',
     'icon': '/todo_app/static/description/todo.png',
-    'version': '0.1',
+    'author': 'Bhabishwor Gurung',
     'depends': [
         'base_setup',
         'mail',
