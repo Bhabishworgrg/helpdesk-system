@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="todo_app_website_template" inherit_id="website.header_call_to_action" name="Helpdesk Header Call to Action">
+		<xpath expr="//a[@href='/contactus']" position="after">
+			<a href="/my" class="oe_unremovable btn btn-primary btn_cta">Portal</a>
+		</xpath>
+	</template>
+</odoo>

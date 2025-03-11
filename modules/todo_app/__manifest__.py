@@ -15,6 +15,7 @@
         'wizard/todo_next_stage_wizard.xml',
         'wizard/todo_restore_wizard.xml',
         'wizard/todo_cancel_wizard.xml',
+        'views/website_templates.xml',
         'views/todo.xml',
         'views/todo_task.xml',
         'views/res_config_settings.xml',
