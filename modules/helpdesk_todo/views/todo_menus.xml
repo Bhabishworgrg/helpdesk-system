@@ -7,4 +7,12 @@
 		action="action_helpdesk_todo_stage"
 		sequence="2"
 	/>
+
+	<menuitem
+		id="menu_todo_team"
+		name="Team"
+		parent="todo_app.menu_todo_config"
+		action="action_helpdesk_todo_team"
+		sequence="3"
+	/>
 </odoo>

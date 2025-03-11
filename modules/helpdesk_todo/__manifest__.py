@@ -19,6 +19,7 @@
         'views/helpdesk_ticket.xml',
         'views/helpdesk_menus.xml',
         'views/todo.xml',
+        'views/todo_team.xml',
         'views/todo_menus.xml',
     ],
     'installable': True,
