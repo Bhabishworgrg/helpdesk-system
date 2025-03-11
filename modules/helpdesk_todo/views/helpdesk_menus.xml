@@ -13,6 +13,6 @@
 		name="Report"
 		parent="helpdesk_app.menu_helpdesk_app"
 		action="action_helpdesk_todo_helpdesk_report"
-		sequence="2"
+		sequence="3"
 	/>
 </odoo>

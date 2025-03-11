@@ -48,12 +48,20 @@
 		sequence="2"
 		groups="todo_app.group_todo_admin,base.group_system,base.group_erp_manager"
 	/>
-	
+
+	<menuitem
+		id="menu_todo_settings"
+		name="Settings"
+		parent="menu_todo_config"
+		action="action_todo_app_todo_settings"
+		sequence="1"
+	/>
+
 	<menuitem
 		id="menu_todo_task"
 		name="Task"
 		parent="menu_todo_config"
 		action="action_todo_app_todo_task"
-		sequence="1"
+		sequence="2"
 	/>
 </odoo>
