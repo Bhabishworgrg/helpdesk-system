@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="0">
+		<record model="todo_app.todo_template" id="todo_template_1" forcecreate="False">
+			<field name="name">IT Template</field>
+			<field name="description">A template for IT projects</field>
+		</record>
+		<record model="todo_app.template_tasks" id="template_tasks_1" forcecreate="False">
+			<field name="todo_template_id" ref="todo_template_1"/>
+			<field name="name">Research</field>
+			<field name="summary">Research the project.</field>
+			<field name="days_deadline">1</field>
+		</record>
+		<record model="todo_app.template_tasks" id="template_tasks_2" forcecreate="False">
+			<field name="todo_template_id" ref="todo_template_1"/>
+			<field name="name">Development</field>
+			<field name="summary">Code the project.</field>
+			<field name="days_deadline">10</field>
+		</record>
+		<record model="todo_app.template_tasks" id="template_tasks_3" forcecreate="False">
+			<field name="todo_template_id" ref="todo_template_1"/>
+			<field name="name">Testing</field>
+			<field name="summary">Write unit tests.</field>
+			<field name="days_deadline">15</field>
+		</record>
+		
+		<record model="todo_app.todo_template" id="todo_template_2" forcecreate="False">
+			<field name="name">Sales Template</field>
+			<field name="description">A template for Sales projects</field>
+		</record>
+		<record model="todo_app.template_tasks" id="template_tasks_4" forcecreate="False">
+			<field name="todo_template_id" ref="todo_template_2"/>
+			<field name="name">Marketing</field>
+			<field name="summary">Market the finalized product.</field>
+			<field name="days_deadline">25</field>
+		</record>
+
+		<record model="todo_app.todo_template" id="todo_template_3" forcecreate="False">
+			<field name="name">Operations Template</field>
+			<field name="description">A template for Operations projects</field>
+		</record>
+		<record model="todo_app.template_tasks" id="template_tasks_5" forcecreate="False">
+			<field name="todo_template_id" ref="todo_template_3"/>
+			<field name="name">Capacity Planning</field>
+			<field name="summary">Determining the optimal production capacity to meet customer demand.</field>
+			<field name="days_deadline">6</field>
+		</record>
+	</data>
+</odoo>
+

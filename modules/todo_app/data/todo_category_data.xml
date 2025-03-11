@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-	<data noupdate="0">
+	<data noupdate="1">
 		<record model="todo_app.todo_category" id="todo_category_1" forcecreate="False">
 			<field name="name">IT</field>
 			<field name="description">This category will be used for IT related projects.</field>

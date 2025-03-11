@@ -17,9 +17,9 @@ class TodoTemplate(models.Model):
     
     name = fields.Char('Name', required=True)
     description = fields.Text('Description')
-    task_ids = fields.One2many('todo_app.template_tasks', 'task_template_id')
+    task_ids = fields.One2many('todo_app.template_tasks', 'todo_template_id')
     
-    _sql_constraints = [('name_uniq', 'unique (name)', 'Template name already exists!')]
+    _sql_constraints = [('name_unique', 'unique(name)', 'Template name already exists!')]
 
 
 class TemplateTasks(models.Model):
@@ -27,10 +27,10 @@ class TemplateTasks(models.Model):
     _description = 'Template Tasks'
     _order = 'id desc'
 
-    task_template_id = fields.Many2one('todo_app.task_template', string='Todo Template', required=True)
+    todo_template_id = fields.Many2one('todo_app.todo_template', string='Todo Template', required=True)
     sequence = fields.Integer('Sequence', default=1)
     name = fields.Char('Name', required=True)
     summary = fields.Text('Summary')
     days_deadline = fields.Integer('Due in', default=5)
     
-    _sql_constraints = [('name_uniq', 'unique (name, task_template_id)', 'Task name already exists!')]
+    _sql_constraints = [('template_task_unique', 'unique(name, todo_template_id)', 'Task name already exists!')]
