@@ -22,6 +22,7 @@
         'views/todo_menus.xml',
     ],
     'installable': True,
-    'application': True,
+    'application': False,
+    'auto_install': True,
     'license': 'GPL-3',
 }
