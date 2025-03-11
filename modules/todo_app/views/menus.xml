@@ -64,4 +64,12 @@
 		action="action_todo_app_todo_task"
 		sequence="2"
 	/>
+
+	<menuitem
+		id="menu_todo_category"
+		name="Category"
+		parent="menu_todo_config"
+		action="action_todo_app_todo_category"
+		sequence="3"
+	/>
 </odoo>

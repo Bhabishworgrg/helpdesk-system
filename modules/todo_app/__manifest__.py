@@ -19,6 +19,7 @@
         'views/website_templates.xml',
         'views/todo.xml',
         'views/todo_task.xml',
+        'views/todo_category.xml',
         'views/res_config_settings.xml',
         'views/menus.xml',
     ],
