@@ -2,6 +2,7 @@
 
 {
     'name': 'Todo App',
+    'icon': '/todo_app/static/description/todo.png',
     'version': '0.1',
     'depends': [
         'base_setup',
