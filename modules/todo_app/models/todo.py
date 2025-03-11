@@ -23,6 +23,8 @@ class Todo(models.Model):
     task_ids = fields.One2many('todo_app.todo_task', 'todo_id', string='Tasks', tracking=True)
     remark_ids = fields.One2many('todo_app.todo_remark', 'todo_id', string='Remarks')
     
+    _sql_constraints = [('name_unique', 'unique(name)', 'Todo name already exists.')]
+
     @api.depends('task_ids', 'task_ids.is_complete')
     def _compute_is_complete(self):
         for rec in self:

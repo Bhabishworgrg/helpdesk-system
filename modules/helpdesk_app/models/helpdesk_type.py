@@ -10,3 +10,5 @@ class HelpdeskType(models.Model):
     _order = 'id desc'
 
     name = fields.Char('Name', required=True)
+
+    _sql_constraints = [('name_unique', 'unique(name)', 'Type name already exists.')]

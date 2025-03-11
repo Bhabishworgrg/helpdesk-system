@@ -13,6 +13,8 @@ class HelpdeskTodoStage(models.Model):
     name = fields.Char('Name', required=True)
     is_prepopulated = fields.Boolean('Is Prepopulated', default=False)
 
+    _sql_constraints = [('name_unique', 'unique(name)', 'Stage name already exists.')]
+
     def unlink(self):
         if self.search_count([('id', 'in', self.ids), ('is_prepopulated', '=', True)]):
             raise UserError('You cannot delete a prepopulated stage.')

@@ -17,6 +17,8 @@ class HelpdeskTicket(models.Model):
     description = fields.Html('Description')
     reported_date = fields.Date('Reported Date', default=fields.Date.today)
 
+    _sql_constraints = [('title_unique', 'unique(title)', 'Ticket already exists.')]
+
     category_id = fields.Many2one(
         'helpdesk_app.helpdesk_category', 
         string='Category', 
