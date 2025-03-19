@@ -10,8 +10,10 @@ class Todo(models.Model):
     _description = 'Todo'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'sequence asc'
-   
+    _rec_name = 'reference_id'
+    
     sequence = fields.Integer('Sequence', default=1)
+    reference_id = fields.Char(string="Todo Reference", required=True, readonly=False, default='New')
     name = fields.Char('Name', required=True, tracking=True)
     active = fields.Boolean('Active', default=True, tracking=True)
     date_deadline = fields.Date('Deadline', default=fields.Date.today, tracking=True)
@@ -129,3 +131,10 @@ class Todo(models.Model):
     
     def get_portal_url(self):
         return f'/my/todo/{self.id}'
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for val in vals_list:
+            if val.get('reference_id', ('New')) == 'New':
+                val['reference_id'] = self.env['ir.sequence'].next_by_code('todo_app.todo') or 'New'
+        return super().create(vals_list)

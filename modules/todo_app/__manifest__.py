@@ -16,6 +16,7 @@
         'report/ir_actions_report_template.xml',
         'report/ir_actions_report.xml',
         'data/ir_cron.xml',
+        'data/ir_sequence_data.xml',
         'data/todo_category_data.xml',
         'data/todo_template_data.xml',
         'data/todo_email_template_data.xml',
