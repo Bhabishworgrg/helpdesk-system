@@ -21,7 +21,7 @@
 				<attribute name="invisible">True</attribute>
 			</button>
 			<xpath expr="//form/header/button" position="before">
-				<button name="action_lead_to_opportunity" string="Convert to Opportunity" type="object" class="oe_highlight" invisible="type == 'opportunity' or not active" data-hotkey="v"/>
+				<button name="action_lead_to_opportunity" string="Convert to Opportunity" type="object" class="oe_highlight" invisible="type == 'opportunity' or is_lost" data-hotkey="v"/>
 			</xpath>
 			
 			<button name="toggle_active" position="attributes">
@@ -33,7 +33,7 @@
 
 			<xpath expr="//form/header/button[@name='%(crm.crm_lead_lost_action)d'][2]" position="attributes">
 				<attribute name="invisible">
-					type == 'opportunity' or probability == 0 and is_lost
+					type == 'opportunity' or is_lost
 				</attribute>
 			</xpath>
 
