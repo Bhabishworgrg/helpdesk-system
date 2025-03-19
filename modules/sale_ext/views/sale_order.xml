@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sale_ext_sale_order_view_form" model="ir.ui.view">
+        <field name="name">sale_ext.sale_order.view.form</field>
+        <field name="model">sale.order</field>
+		<field name="inherit_id" ref="sale.view_order_form"/>
+		<field name="arch" type="xml">
+			<button id="send_by_email_primary" position="attributes">
+				<attribute name="invisible">new_state != 'approved'</attribute>
+			</button>
+
+			<xpath expr="//form/header/button[@name='action_confirm'][2]" position="attributes">
+				<attribute name="invisible">new_state != 'approved'</attribute>
+			</xpath>
+			
+			<field name="state" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</field>
+			<xpath expr="//form/header" position="inside">
+				<field name="new_state" widget="statusbar" statusbar_visible="draft,approval,approved,sent,sale"/>
+			</xpath>
+			
+			<xpath expr="//form/header/button" position="before">
+				<button name="action_send_for_approval" string="Send for Approval" type="object" data-hotkey="g" invisible="new_state != 'draft'" class="btn-primary"/>
+			</xpath>
+
+			<xpath expr="//form/header/button" position="before">
+				<button name="action_approve" string="Approve" type="object" data-hotkey="a" invisible="new_state != 'approval'" class="btn-primary"/>
+			</xpath>
+		</field>
+	</record>
+</odoo>
