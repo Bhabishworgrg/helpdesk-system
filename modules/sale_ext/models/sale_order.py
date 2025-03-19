@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields
+from odoo import models, fields, api
 
 
 NEW_SALE_ORDER_STATE = [
@@ -23,3 +23,13 @@ class SaleOrder(models.Model):
 
     def action_approve(self):
         self.write({'new_state': 'approved'})
+    
+    @api.returns('mail.message', lambda value: value.id)
+    def message_post(self, **kwargs):
+        res = super().message_post(**kwargs)
+        if self.env.context.get('mark_so_as_sent'):
+            draft_or_approved = self.filtered(lambda o: o.new_state in ['draft', 'approved'])
+            draft_or_approved.with_context(tracking_disable=True).write({
+                'new_state': 'sent'
+            })
+        return res 
