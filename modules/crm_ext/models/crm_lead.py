@@ -25,6 +25,20 @@ class Lead(models.Model):
         })
         self._compute_probabilities()
 
+    def action_set_won_rainbowman(self):
+        partner_id = self.env['res.partner'].search(
+            [
+                ('name', '=', self.contact_name),
+                ('email', '=', self.email_from)
+            ], limit=1)
+
+        for rec in self:
+            rec.with_context(default_user_id=self.user_id.id)._handle_partner_assignment(
+                force_partner_id=self.partner_id.id or rec.partner_id.id,
+                create_missing=(not partner_id)
+            )
+        return super().action_set_won_rainbowman()
+
     def write(self, values):
         if 'stage_id' in values:
             self.prev_stage_id = self.stage_id
