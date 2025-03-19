@@ -10,7 +10,7 @@
 			</xpath>
 
 			<xpath expr="//form/header/button[@name='action_quotation_send'][1]" position="attributes">
-				<attribute name="invisible">new_state != 'approved'</attribute>
+				<attribute name="invisible">new_state != 'approved' and not (new_state == 'draft' and not need_approval)</attribute>
 			</xpath>
 
 			<xpath expr="//form/header/button[@name='action_quotation_send'][2]" position="attributes">
@@ -22,7 +22,7 @@
 			</xpath>
 			
 			<xpath expr="//form/header/button[@name='action_confirm'][2]" position="attributes">
-				<attribute name="invisible">new_state != 'approved'</attribute>
+				<attribute name="invisible">new_state != 'approved' and not (new_state == 'draft' and not need_approval)</attribute>
 			</xpath>
 			
 			<xpath expr="//form/header/button[@name='action_quotation_send'][3]" position="attributes">
@@ -53,7 +53,7 @@
 			</xpath>
 			
 			<xpath expr="//form/header/button" position="before">
-				<button name="action_send_for_approval" string="Send for Approval" type="object" data-hotkey="g" invisible="new_state != 'draft'" class="btn-primary"/>
+				<button name="action_send_for_approval" string="Send for Approval" type="object" data-hotkey="g" invisible="new_state != 'draft' or not need_approval" class="btn-primary"/>
 			</xpath>
 
 			<xpath expr="//form/header/button" position="before">

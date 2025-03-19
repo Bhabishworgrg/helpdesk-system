@@ -17,6 +17,7 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     new_state = fields.Selection(NEW_SALE_ORDER_STATE, string='Status', readonly=True, default='draft')
+    need_approval = fields.Boolean('Need Approval', compute='_compute_need_approval', store=True)
         
     def action_send_for_approval(self):
         self.write({'new_state': 'approval'})
@@ -46,3 +47,14 @@ class SaleOrder(models.Model):
         orders = self.filtered(lambda s: s.new_state in ['cancel', 'sent'])
         orders.write({'new_state': 'draft'})
         return super().action_draft()
+
+    @api.depends('order_line.price_unit', 'order_line.product_template_id.list_price')
+    def _compute_need_approval(self):
+        for rec in self:
+            rec.need_approval = False
+
+            unit_prices = rec.order_line.mapped('price_unit')
+            sales_prices = rec.order_line.product_template_id.mapped('list_price')
+            for unit_price, sales_price in zip(unit_prices, sales_prices):
+                if unit_price < sales_price:
+                    rec.need_approval = True
