@@ -6,9 +6,11 @@
 		<field name="inherit_id" ref="crm.crm_lead_view_form"/>
 		<field name="arch" type="xml">
 			<button name="%(crm.action_crm_lead2opportunity_partner)d" position="attributes">
-				<attribute name="name">action_lead_to_opportunity</attribute>
-				<attribute name="type">object</attribute>
+				<attribute name="invisible">True</attribute>
 			</button>
+			<xpath expr="//form/header/button" position="before">
+				<button name="action_lead_to_opportunity" string="Convert to Opportunity" type="object" class="oe_highlight" invisible="type == 'opportunity' or not active" data-hotkey="v"/>
+			</xpath>
 		</field>
 	</record>
 </odoo>
