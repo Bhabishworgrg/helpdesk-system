@@ -125,6 +125,7 @@
 
 					<group>
 						<group>
+							<field name="reference_id"/>
 							<field name="reported_date" readonly="True"/>
 							<field name="category_id" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True }"/>
 							<field name="tag_ids" options="{ 'no_create': True, 'no_create_edit': True, 'no_open': True, 'color_field': 'color' }" widget="many2many_tags"/>

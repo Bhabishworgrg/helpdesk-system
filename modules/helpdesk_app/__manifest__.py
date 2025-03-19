@@ -12,6 +12,7 @@
     'data': [
         'security/ir_rules.xml',
         'security/ir.model.access.csv',
+        'data/ir_sequence_data.xml',
         'data/helpdesk_category_data.xml',
         'data/helpdesk_tag_data.xml',
         'data/helpdesk_type_data.xml',

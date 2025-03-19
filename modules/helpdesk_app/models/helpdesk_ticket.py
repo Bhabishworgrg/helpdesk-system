@@ -6,11 +6,12 @@ from odoo import fields, models, api
 class HelpdeskTicket(models.Model):
     _name = 'helpdesk_app.helpdesk_ticket'
     _description = 'Helpdesk Ticket'
-    _rec_name = 'title'
+    _rec_name = 'reference_id'
     _order = 'sequence asc'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     sequence = fields.Integer('Sequence', default=1)
+    reference_id = fields.Char(string="Ticket Reference", required=True, readonly=False, default='New')
     active = fields.Boolean('Active', default=True, tracking=True)
     title = fields.Char('Title', required=True, tracking=True)
     query = fields.Text('Query', tracking=True)
@@ -106,9 +107,13 @@ class HelpdeskTicket(models.Model):
                 rec.partner_email = False
                 rec.partner_phone = False
 
-    @api.model
-    def create(self, vals):
-        rec = super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for val in vals_list:
+            if val.get('reference_id', ('New')) == 'New':
+                val['reference_id'] = self.env['ir.sequence'].next_by_code('helpdesk_app.helpdesk_ticket') or 'New'
+        rec = super().create(vals_list)
+        
         if rec.type_id == rec.env.ref('helpdesk_app.helpdesk_type_2'):
             rec.sudo().message_post(
                 body=f'I have a query: {rec.query}',
