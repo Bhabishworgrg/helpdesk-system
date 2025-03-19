@@ -9,6 +9,7 @@
     ],
     'data': [
         'data/crm_stage_data.xml',
+        'wizard/crm_lead_lost_wizard.xml',
         'views/crm_lead.xml',
     ],
     'installable': True,

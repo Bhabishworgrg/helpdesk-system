@@ -5,12 +5,43 @@
 		<field name="model">crm.lead</field>
 		<field name="inherit_id" ref="crm.crm_lead_view_form"/>
 		<field name="arch" type="xml">
+			<button name="action_set_won_rainbowman" position="attributes">
+				<attribute name="invisible">
+					is_lost or probability == 100 or type == 'lead'
+				</attribute>
+			</button>
+			
+			<xpath expr="//form/header/button[@name='%(crm.crm_lead_lost_action)d'][1]" position="attributes">
+				<attribute name="invisible">
+					type == 'lead' or is_lost and probability &lt; 100
+				</attribute>	
+			</xpath>
+
 			<button name="%(crm.action_crm_lead2opportunity_partner)d" position="attributes">
 				<attribute name="invisible">True</attribute>
 			</button>
 			<xpath expr="//form/header/button" position="before">
 				<button name="action_lead_to_opportunity" string="Convert to Opportunity" type="object" class="oe_highlight" invisible="type == 'opportunity' or not active" data-hotkey="v"/>
 			</xpath>
+			
+			<button name="toggle_active" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</button>
+			<xpath expr="//form/header" position="inside">
+				<button name="action_restore" string="Restore" type="object" data-hotkey="x" invisible="not is_lost"/>
+			</xpath>
+
+			<xpath expr="//form/header/button[@name='%(crm.crm_lead_lost_action)d'][2]" position="attributes">
+				<attribute name="invisible">
+					type == 'opportunity' or probability == 0 and is_lost
+				</attribute>
+			</xpath>
+
+			<field name="stage_id" position="attributes">
+				<attribute name="invisible">
+					is_lost or type == 'lead'
+				</attribute>
+			</field>
 		</field>
 	</record>
 </odoo>

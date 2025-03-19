@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="crm_ext_crm_lead_lost_wizard_view_form" model="ir.ui.view">
+		<field name="name">crm_ext.crm_lead_lost_wizard.view.form</field>
+		<field name="model">crm.lead.lost</field>
+        <field name="inherit_id" ref="crm.crm_lead_lost_view_form"/>
+		<field name="arch" type="xml">
+			<button name="action_lost_reason_apply" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</button>
+			<xpath expr="//form/footer/button" position="before">
+				<button name="action_mark_as_lost" string="Mark as Lost" type="object" class="btn-primary" data-hotkey="q"/>
+			</xpath>
+		</field>
+	</record>
+</odoo>
+
