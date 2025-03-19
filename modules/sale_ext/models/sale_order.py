@@ -25,7 +25,10 @@ class SaleOrder(models.Model):
 
     def action_approve(self):
         self.write({'new_state': 'approved'})
-    
+
+    def action_reject(self):
+        self.write({'new_state': 'draft'})
+
     @api.returns('mail.message', lambda value: value.id)
     def message_post(self, **kwargs):
         res = super().message_post(**kwargs)
