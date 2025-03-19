@@ -20,3 +20,6 @@ class SaleOrder(models.Model):
         
     def action_send_for_approval(self):
         self.write({'new_state': 'approval'})
+
+    def action_approve(self):
+        self.write({'new_state': 'approved'})
