@@ -5,13 +5,45 @@
         <field name="model">sale.order</field>
 		<field name="inherit_id" ref="sale.view_order_form"/>
 		<field name="arch" type="xml">
-			<button id="send_by_email_primary" position="attributes">
-				<attribute name="invisible">new_state != 'approved'</attribute>
-			</button>
+			<xpath expr="//form/header/button[@name='%(sale.action_view_sale_advance_payment_inv)d'][2]" position="attributes">
+				<attribute name="invisible">invoice_status != 'to invoice' or new_state != 'sale'</attribute>
+			</xpath>
 
+			<xpath expr="//form/header/button[@name='action_quotation_send'][1]" position="attributes">
+				<attribute name="invisible">new_state != 'approved'</attribute>
+			</xpath>
+
+			<xpath expr="//form/header/button[@name='action_quotation_send'][2]" position="attributes">
+				<attribute name="invisible">new_state != 'approved' or invoice_count &gt;= 1</attribute>
+			</xpath>
+
+			<xpath expr="//form/header/button[@name='action_confirm'][1]" position="attributes">
+				<attribute name="invisible">new_state != 'sent'</attribute>
+			</xpath>
+			
 			<xpath expr="//form/header/button[@name='action_confirm'][2]" position="attributes">
 				<attribute name="invisible">new_state != 'approved'</attribute>
 			</xpath>
+			
+			<xpath expr="//form/header/button[@name='action_quotation_send'][3]" position="attributes">
+				<attribute name="invisible">new_state == 'draft' or invoice_count &gt;= 1</attribute>
+			</xpath>
+
+			<xpath expr="//form/header/button[@name='action_quotation_send'][4]" position="attributes">
+				<attribute name="invisible">new_state not in ('sent', 'sale')</attribute>
+			</xpath>
+
+			<button name="action_cancel" position="attributes">
+				<attribute name="invisible">new_state == 'cancel' or not id or locked</attribute>
+			</button>
+
+			<button name="action_draft" position="attributes">
+				<attribute name="invisible">new_state != 'cancel'</attribute>
+			</button>
+
+			<button name="action_lock" position="attributes">
+				<attribute name="invisible">locked or new_state != 'sale'</attribute>
+			</button>
 			
 			<field name="state" position="attributes">
 				<attribute name="invisible">True</attribute>
