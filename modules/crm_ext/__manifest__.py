@@ -8,6 +8,7 @@
         'crm',
     ],
     'data': [
+        'data/crm_stage_data.xml',
         'views/crm_lead.xml',
     ],
     'installable': True,
