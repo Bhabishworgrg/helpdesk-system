@@ -6,7 +6,7 @@ from odoo import models, fields, api
 class Lead(models.Model):
     _inherit = 'crm.lead'
 
-    is_lost = fields.Boolean(string='Is Lost', default=False, compute='_compute_is_lost')
+    is_lost = fields.Boolean(string='Is Lost', default=False, compute='_compute_is_lost', store=True)
     prev_stage_id = fields.Many2one('crm.stage', string='Previous Stage')
 
     @api.depends('stage_id')
