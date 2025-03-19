@@ -33,3 +33,16 @@ class SaleOrder(models.Model):
                 'new_state': 'sent'
             })
         return res 
+    
+    def action_cancel(self):
+        if not self.env.context.get('disable_cancel_warning'):
+            inv = self.invoice_ids.filtered(lambda inv: inv.new_state == 'draft')
+            inv.button_cancel()
+            self.write({'new_state': 'cancel'})
+        return super().action_cancel()
+
+
+    def action_draft(self):
+        orders = self.filtered(lambda s: s.new_state in ['cancel', 'sent'])
+        orders.write({'new_state': 'draft'})
+        return super().action_draft()
