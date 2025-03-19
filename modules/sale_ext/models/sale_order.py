@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
+from odoo.exceptions import UserError
 
 
 NEW_SALE_ORDER_STATE = [
@@ -47,6 +48,43 @@ class SaleOrder(models.Model):
         orders = self.filtered(lambda s: s.new_state in ['cancel', 'sent'])
         orders.write({'new_state': 'draft'})
         return super().action_draft()
+
+    def action_confirm(self):
+        self.ensure_one()
+        if self.new_state not in {'draft', 'approved', 'sent'}:
+            raise UserError(_('Some orders are not in a state requiring confirmation.'))
+        if any(
+            not line.display_type
+            and not line.is_downpayment
+            and not line.product_id
+            for line in self.order_line
+        ):
+            raise UserError(_('A line on these orders missing a product, you cannot confirm it.'))
+
+        self.order_line._validate_analytic_distribution()
+
+        for order in self:
+            if order.partner_id in order.message_partner_ids:
+                continue
+            order.message_subscribe([order.partner_id.id])
+
+        self.write({
+            'new_state': 'sale',
+            'date_order': fields.Datetime.now()
+        })
+
+        context = self._context.copy()
+        context.pop('default_name', None)
+
+        self.with_context(context)._action_confirm()
+        user = self[:1].create_uid
+        if user and user.sudo().has_group('sale.group_auto_done_setting'):
+            self.action_lock()
+
+        if self.env.context.get('send_email'):
+            self._send_order_confirmation_mail()
+
+        return True
 
     @api.depends('order_line.price_unit', 'order_line.product_template_id.list_price')
     def _compute_need_approval(self):
