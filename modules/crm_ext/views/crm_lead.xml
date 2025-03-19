@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="crm_ext_crm_lead_view_form" model="ir.ui.view">
+		<field name="name">crm_ext.crm_lead.view.form</field>
+		<field name="model">crm.lead</field>
+		<field name="inherit_id" ref="crm.crm_lead_view_form"/>
+		<field name="arch" type="xml">
+			<button name="%(crm.action_crm_lead2opportunity_partner)d" position="attributes">
+				<attribute name="name">action_lead_to_opportunity</attribute>
+				<attribute name="type">object</attribute>
+			</button>
+		</field>
+	</record>
+</odoo>
+
