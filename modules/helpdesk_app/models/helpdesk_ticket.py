@@ -11,7 +11,7 @@ class HelpdeskTicket(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     sequence = fields.Integer('Sequence', default=1)
-    reference_id = fields.Char(string="Ticket Reference", required=True, readonly=False, default='New')
+    reference_id = fields.Char(string='Reference ID', required=True, readonly=True, default='New')
     active = fields.Boolean('Active', default=True, tracking=True)
     title = fields.Char('Title', required=True, tracking=True)
     query = fields.Text('Query', tracking=True)

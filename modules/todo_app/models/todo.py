@@ -13,7 +13,7 @@ class Todo(models.Model):
     _rec_name = 'reference_id'
     
     sequence = fields.Integer('Sequence', default=1)
-    reference_id = fields.Char(string="Todo Reference", required=True, readonly=False, default='New')
+    reference_id = fields.Char(string='Reference ID', required=True, readonly=True, default='New')
     name = fields.Char('Name', required=True, tracking=True)
     active = fields.Boolean('Active', default=True, tracking=True)
     date_deadline = fields.Date('Deadline', default=fields.Date.today, tracking=True)
