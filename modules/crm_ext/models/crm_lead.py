@@ -41,5 +41,6 @@ class Lead(models.Model):
 
     def write(self, values):
         if 'stage_id' in values:
-            self.prev_stage_id = self.stage_id
+            for rec in self:
+                rec.prev_stage_id = rec.stage_id
         return super().write(values)
