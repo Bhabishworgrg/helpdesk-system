@@ -75,6 +75,11 @@ class SaleOrder(models.Model):
         })
         return values
 
+    def action_quotation_sent(self):
+        res = super().action_quotation_sent()
+        self.write({'new_state': 'sent'})
+        return res
+
     @api.depends('order_line.price_unit', 'order_line.product_template_id.list_price')
     def _compute_need_approval(self):
         for rec in self:
