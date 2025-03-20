@@ -24,10 +24,21 @@ class SaleOrder(models.Model):
         self.write({'new_state': 'approval'})
 
     def action_approve(self):
+        for rec in self:
+            rec.message_post(
+                body=f'Draft of sale order {rec.name} was approved.',
+                partner_ids=rec.user_id.partner_id.ids
+            )
+        
         self.write({'new_state': 'approved'})
 
     def action_reject(self):
-        
+        for rec in self:
+            rec.message_post(
+                body=f'Draft of sale order {rec.name} was rejected.',
+                partner_ids=rec.user_id.partner_id.ids
+            )
+
         self.write({'new_state': 'draft'})
 
     @api.returns('mail.message', lambda value: value.id)
