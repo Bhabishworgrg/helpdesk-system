@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="sale_ext_sale_order_view_form" model="ir.ui.view">
+    <record id="sale_ext_sale_order_view_list" model="ir.ui.view">
+        <field name="name">sale_ext.sale_order.view.list</field>
+        <field name="model">sale.order</field>
+		<field name="inherit_id" ref="sale.view_quotation_tree"/>
+		<field name="arch" type="xml">
+			<field name="state" position="attributes">
+				<attribute name="column_invisible">True</attribute>
+			</field>
+			<xpath expr="//list/field[@name='state']" position="after">
+                <field name="new_state"
+					decoration-muted="new_state == 'draft'"
+					decoration-warning="new_state == 'approval'"
+                    decoration-info="new_state == 'approved'"
+					decoration-primary="new_state == 'sent'"
+                    decoration-success="new_state == 'sale'"
+					decoration-danger="new_state == 'cancel'"
+                    widget="badge"
+					optional="show"
+				/>
+			</xpath>
+		</field>
+	</record>
+			
+	<record id="sale_ext_sale_order_view_form" model="ir.ui.view">
         <field name="name">sale_ext.sale_order.view.form</field>
         <field name="model">sale.order</field>
 		<field name="inherit_id" ref="sale.view_order_form"/>
@@ -49,7 +72,7 @@
 				<attribute name="invisible">True</attribute>
 			</field>
 			<xpath expr="//form/header" position="inside">
-				<field name="new_state" widget="statusbar" statusbar_visible="draft,approval,approved,sent,sale"/>
+				<field name="new_state" widget="statusbar" statusbar_visible="draft,sent,sale"/>
 			</xpath>
 			
 			<xpath expr="//form/header/button" position="before">
