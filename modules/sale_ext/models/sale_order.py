@@ -19,12 +19,13 @@ class SaleOrder(models.Model):
 
     new_state = fields.Selection(NEW_SALE_ORDER_STATE, string='Status', readonly=True, default='draft')
     need_approval = fields.Boolean('Need Approval', compute='_compute_need_approval', store=True)
-        
+    remark_ids = fields.One2many('sale_ext.sale_order_remark', 'sale_order_id', string='Remarks')
+
     def action_send_for_approval(self):
         for rec in self:
             admin_group = rec.env.ref('sales_team.group_sale_manager')
             rec.message_post(
-                body=f'{rec.user_id.name} sent the sale order {rec.name} for approval.',
+                body=f'{rec.user_id.name} sent the quotation {rec.name} for approval.',
                 partner_ids=admin_group.users.mapped('partner_id').ids,
             )
 
@@ -33,20 +34,11 @@ class SaleOrder(models.Model):
     def action_approve(self):
         for rec in self:
             rec.message_post(
-                body=f'Draft of sale order {rec.name} was approved.',
+                body=f'Quotation {rec.name} was approved.',
                 partner_ids=rec.user_id.partner_id.ids
             )
         
         self.write({'new_state': 'approved'})
-
-    def action_reject(self):
-        for rec in self:
-            rec.message_post(
-                body=f'Draft of sale order {rec.name} was rejected.',
-                partner_ids=rec.user_id.partner_id.ids
-            )
-
-        self.write({'new_state': 'draft'})
 
     @api.returns('mail.message', lambda value: value.id)
     def message_post(self, **kwargs):

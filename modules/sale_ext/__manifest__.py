@@ -8,6 +8,8 @@
         'sale',
     ],
     'data': [
+        'security/ir.model.access.csv',
+        'wizard/sale_order_reject_wizard.xml',
         'views/sale_order.xml',
     ],
     'installable': True,

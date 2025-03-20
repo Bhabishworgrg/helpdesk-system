@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sale_ext_sale_order_reject_wizard_view_form" model="ir.ui.view">
+        <field name="name">sale_ext.sale_order_reject_wizard.view.form</field>
+        <field name="model">sale_ext.sale_order_reject_wizard</field>
+        <field name="arch" type="xml">
+			<form string="Reject Quotation">
+				<field name="sale_order_id" invisible="1"></field>
+                <group>
+                    <field name="remark"/>
+					<field name="document"/>
+                </group>
+                <footer>
+                    <button name="action_confirm" type="object" string="Confirm" class="oe_highlight"/>
+                    <button string="Cancel" special="cancel" class="oe_stat_button"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sale_ext_sale_order_reject_wizard" model="ir.actions.act_window">
+        <field name="name">Reject Quotation</field>
+        <field name="res_model">sale_ext.sale_order_reject_wizard</field>
+        <field name="view_mode">form</field>
+		<field name="context">{ 'default_sale_order_id': active_id }</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
+
