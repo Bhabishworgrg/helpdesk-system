@@ -57,10 +57,10 @@
 			</xpath>
 
 			<xpath expr="//form/header/button" position="before">
-				<button name="action_reject" string="Reject" type="object" data-hotkey="r" invisible="new_state != 'approval'" class="btn-primary"/>
+				<button name="action_reject" string="Reject" type="object" data-hotkey="r" invisible="new_state != 'approval'" class="btn-primary" groups="sales_team.group_sale_manager"/>
 			</xpath>
 			<xpath expr="//form/header/button" position="before">
-				<button name="action_approve" string="Approve" type="object" data-hotkey="a" invisible="new_state != 'approval'" class="btn-primary"/>
+				<button name="action_approve" string="Approve" type="object" data-hotkey="a" invisible="new_state != 'approval'" class="btn-primary" groups="sales_team.group_sale_manager"/>
 			</xpath>
 		</field>
 	</record>
