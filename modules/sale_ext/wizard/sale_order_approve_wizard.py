@@ -6,7 +6,6 @@ from odoo import models, fields
 class SaleOrderApproveWizard(models.TransientModel):
     _name = 'sale_ext.sale_order_approve_wizard'
     _description = 'Sale Order Approve Wizard'
-    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     sale_order_id = fields.Many2one('sale.order', string='Sale Order', required=True)
     remark = fields.Text('Remarks', required=True)
