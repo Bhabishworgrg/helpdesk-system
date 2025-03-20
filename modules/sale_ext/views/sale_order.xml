@@ -63,6 +63,10 @@
 				<button name="%(sale_ext.action_sale_ext_sale_order_approve_wizard)d" string="Approve" type="action" data-hotkey="a" invisible="new_state != 'approval'" class="btn-primary" groups="sales_team.group_sale_manager"/>
 			</xpath>
 
+			<field name="order_line" position="attributes">
+				<attribute name="readonly">new_state in ['approved', 'sent', 'sale', 'cancel'] or locked</attribute>
+			</field>
+
 			<xpath expr="//form/sheet/notebook" position="inside">
 				<page string="Remarks" name="sale_order_remarks">
 					<field name="remark_ids" readonly="True">
