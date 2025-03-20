@@ -21,6 +21,13 @@ class SaleOrder(models.Model):
     need_approval = fields.Boolean('Need Approval', compute='_compute_need_approval', store=True)
         
     def action_send_for_approval(self):
+        for rec in self:
+            admin_group = rec.env.ref('sales_team.group_sale_manager')
+            rec.message_post(
+                body=f'{rec.user_id.name} sent the sale order {rec.name} for approval.',
+                partner_ids=admin_group.users.mapped('partner_id').ids,
+            )
+
         self.write({'new_state': 'approval'})
 
     def action_approve(self):
