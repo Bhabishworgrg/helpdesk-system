@@ -9,6 +9,7 @@
     ],
     'data': [
         'security/ir.model.access.csv',
+        'wizard/sale_order_approve_wizard.xml',
         'wizard/sale_order_reject_wizard.xml',
         'views/sale_order.xml',
     ],

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="sale_ext_sale_order_reject_wizard_view_form" model="ir.ui.view">
-        <field name="name">sale_ext.sale_order_reject_wizard.view.form</field>
-        <field name="model">sale_ext.sale_order_reject_wizard</field>
+    <record id="sale_ext_sale_order_approve_wizard_view_form" model="ir.ui.view">
+        <field name="name">sale_ext.sale_order_approve_wizard.view.form</field>
+        <field name="model">sale_ext.sale_order_approve_wizard</field>
         <field name="arch" type="xml">
-			<form string="Reject Quotation">
+			<form string="Approve Quotation">
 				<field name="sale_order_id" invisible="1"></field>
                 <group>
                     <field name="remark"/>
@@ -18,11 +18,12 @@
         </field>
     </record>
 
-    <record id="action_sale_ext_sale_order_reject_wizard" model="ir.actions.act_window">
-        <field name="name">Reject Quotation</field>
-        <field name="res_model">sale_ext.sale_order_reject_wizard</field>
+    <record id="action_sale_ext_sale_order_approve_wizard" model="ir.actions.act_window">
+        <field name="name">Approve Quotation</field>
+        <field name="res_model">sale_ext.sale_order_approve_wizard</field>
         <field name="view_mode">form</field>
 		<field name="context">{ 'default_sale_order_id': active_id }</field>
         <field name="target">new</field>
     </record>
 </odoo>
+

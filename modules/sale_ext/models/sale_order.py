@@ -31,15 +31,6 @@ class SaleOrder(models.Model):
 
         self.write({'new_state': 'approval'})
 
-    def action_approve(self):
-        for rec in self:
-            rec.message_post(
-                body=f'Quotation {rec.name} was approved.',
-                partner_ids=rec.user_id.partner_id.ids
-            )
-        
-        self.write({'new_state': 'approved'})
-
     @api.returns('mail.message', lambda value: value.id)
     def message_post(self, **kwargs):
         res = super().message_post(**kwargs)

@@ -60,7 +60,7 @@
 				<button name="%(sale_ext.action_sale_ext_sale_order_reject_wizard)d" string="Reject" type="action" data-hotkey="r" invisible="new_state != 'approval'" class="btn-primary" groups="sales_team.group_sale_manager"/>
 			</xpath>
 			<xpath expr="//form/header/button" position="before">
-				<button name="action_approve" string="Approve" type="object" data-hotkey="a" invisible="new_state != 'approval'" class="btn-primary" groups="sales_team.group_sale_manager"/>
+				<button name="%(sale_ext.action_sale_ext_sale_order_approve_wizard)d" string="Approve" type="action" data-hotkey="a" invisible="new_state != 'approval'" class="btn-primary" groups="sales_team.group_sale_manager"/>
 			</xpath>
 
 			<xpath expr="//form/sheet/notebook" position="inside">
