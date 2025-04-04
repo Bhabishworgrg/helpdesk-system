@@ -14,7 +14,5 @@
         'views/sale_order.xml',
     ],
     'installable': True,
-    'application': False,
-    'auto_install': True,
     'license': 'GPL-3',
 }

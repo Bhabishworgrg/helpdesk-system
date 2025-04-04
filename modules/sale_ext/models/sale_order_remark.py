@@ -12,4 +12,3 @@ class SaleOrderRemark(models.Model):
     remark = fields.Text('Remark')
     document = fields.Binary('Document')
     date_time = fields.Datetime('Date Time', default=fields.Datetime.now)
-

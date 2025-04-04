@@ -13,7 +13,5 @@
         'views/crm_lead.xml',
     ],
     'installable': True,
-    'application': False,
-    'auto_install': True,
     'license': 'GPL-3',
 }
