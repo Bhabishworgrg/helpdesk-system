@@ -21,6 +21,13 @@ class Todo(models.Model):
     description = fields.Html('Description')
     progress = fields.Float('Progress', compute='_compute_is_complete', store=True)
     is_complete = fields.Boolean('Is Completed', compute='_compute_is_complete', store=True)
+    stage_id = fields.Many2one(
+        'todo_app.todo_stage',
+        string='Stage',
+        default=lambda self: self.env['todo_app.todo_stage'].sudo().search([('sequence', '=', 1)]),    # Set 'Draft'(if not changed) as default stage
+        group_expand='_read_group_stage_id',
+        tracking=True
+    )
     user_id = fields.Many2one(
         'res.users',
         string='User Assigned',
@@ -56,6 +63,10 @@ class Todo(models.Model):
 
     _sql_constraints = [('name_unique', 'unique(name)', 'Todo name already exists.')]
 
+    @api.model
+    def _read_group_stage_id(self, records, domain, order=None):
+        return records.search([])
+    
     @api.depends('task_ids', 'task_ids.is_complete')
     def _compute_is_complete(self):
         for rec in self:

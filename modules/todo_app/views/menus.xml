@@ -80,4 +80,12 @@
 		action="action_todo_app_todo_template"
 		sequence="4"
 	/>
+	
+	<menuitem
+		id="menu_todo_stage"
+		name="Stage"
+		parent="menu_todo_config"
+		action="action_todo_app_todo_stage"
+		sequence="5"
+	/>
 </odoo>
