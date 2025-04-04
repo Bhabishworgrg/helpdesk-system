@@ -20,7 +20,8 @@ class Todo(models.Model):
     summary = fields.Text('Summary', tracking=True)
     description = fields.Html('Description')
     progress = fields.Float('Progress', compute='_compute_is_complete', store=True)
-    is_complete = fields.Boolean('Is Completed', compute='_compute_is_complete', store=True)
+    is_completed_or_cancelled = fields.Boolean('Is Completed or Cancelled', compute='_compute_is_completed_or_cancelled')
+    is_complete = fields.Boolean('Is Complete', compute='_compute_is_complete', store=True)
     stage_id = fields.Many2one(
         'todo_app.todo_stage',
         string='Stage',
@@ -77,6 +78,14 @@ class Todo(models.Model):
                 rec.is_complete = False
                 rec.progress = 0
 
+    @api.depends('stage_id')
+    def _compute_is_completed_or_cancelled(self):
+        for rec in self:
+            rec.is_completed_or_cancelled = rec.stage_id in [
+                self.env.ref('todo_app.todo_stage_3'), 
+                self.env.ref('todo_app.todo_stage_4'),
+            ]
+    
     @api.onchange('date_deadline')
     def _onchange_date_deadline(self):
         today = fields.Date.today()
