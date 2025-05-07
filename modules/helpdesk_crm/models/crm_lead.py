@@ -13,6 +13,6 @@ class Lead(models.Model):
         for rec in self:
             if rec.stage_id == self.env.ref('crm.stage_lead4') or rec.active == False:
                 rec.ticket_id.write({
-                    'stage_id': self.env.ref('helpdesk_todo.stage_3').id,
+                    'merged_stage_id': self.env.ref('helpdesk_todo.stage_3').id,
                 })
         return res 

@@ -19,11 +19,21 @@ class HelpdeskTicket(models.Model):
     reported_date = fields.Date('Reported Date', default=fields.Date.today)
 
     _sql_constraints = [('title_unique', 'unique(title)', 'Ticket already exists.')]
-
+    
+    stage_id = fields.Many2one(
+        'helpdesk_app.helpdesk_stage',
+        string='Stage',
+        default=lambda self: self.env['helpdesk_app.helpdesk_stage'].sudo().search([('sequence', '=', 1)]),    # Set 'Draft'(if not changed) as default stage
+        group_expand='_read_group_stage_id',
+        tracking=True
+    )
+    is_completed_or_cancelled = fields.Boolean('Is Completed or Cancelled', compute='_compute_is_completed_or_cancelled')
+    is_complete = fields.Boolean('Is Complete', compute='_compute_is_complete', store=True)
+    
     category_id = fields.Many2one(
         'helpdesk_app.helpdesk_category', 
         string='Category', 
-        default=lambda self: self.env.ref('helpdesk_app.helpdesk_category_1'),  # Set 'General Inquiry' as default category
+        default=lambda self: self.env.ref('helpdesk_app.helpdesk_category_1'),  # Set 'General Inquiry'(if not changed) as default category
         tracking=True
     )
     tag_ids = fields.Many2many(
@@ -34,7 +44,7 @@ class HelpdeskTicket(models.Model):
     type_id = fields.Many2one(
         'helpdesk_app.helpdesk_type',
         string='Type',
-        default=lambda self: self.env.ref('helpdesk_app.helpdesk_type_1'),      # Set 'Internal' as default type
+        default=lambda self: self.env.ref('helpdesk_app.helpdesk_type_1'),      # Set 'Internal'(if not changed) as default type
     )
     remark_ids = fields.One2many(
         'helpdesk_app.helpdesk_remark',
@@ -66,6 +76,23 @@ class HelpdeskTicket(models.Model):
         domain='[("id", "in", team_member_ids)]',
         tracking=True
     )
+    
+    @api.depends('stage_id')
+    def _compute_is_completed_or_cancelled(self):
+        for rec in self:
+            rec.is_completed_or_cancelled = rec.stage_id in [
+                self.env.ref('helpdesk_app.helpdesk_stage_3'), 
+                self.env.ref('helpdesk_app.helpdesk_stage_4'),
+            ]
+
+    @api.depends('stage_id')
+    def _compute_is_complete(self):
+        for rec in self:
+            rec.is_complete = rec.stage_id == self.env.ref('helpdesk_app.helpdesk_stage_3')
+    
+    @api.model
+    def _read_group_stage_id(self, records, domain, order=None):
+        return records.search([])
     
     @api.depends('team_id')
     def _compute_team_member_ids(self):
@@ -111,7 +138,7 @@ class HelpdeskTicket(models.Model):
     def create(self, vals_list):
         for val in vals_list:
             if val.get('reference_id', ('New')) == 'New':
-                val['reference_id'] = self.env['ir.sequence'].next_by_code('helpdesk_app.helpdesk_ticket') or 'New'
+                val['reference_id'] = self.env['ir.sequence'].sudo().next_by_code('helpdesk_app.helpdesk_ticket') or 'New'
         rec = super().create(vals_list)
         
         if rec.type_id == rec.env.ref('helpdesk_app.helpdesk_type_2'):

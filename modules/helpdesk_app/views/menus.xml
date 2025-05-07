@@ -80,4 +80,12 @@
 		action="action_helpdesk_app_helpdesk_team"
 		sequence="4"
 	/>
+
+	<menuitem
+		id="menu_helpdesk_stage"
+		name="Stage"
+		parent="menu_helpdesk_config"
+		action="action_helpdesk_app_helpdesk_stage"
+		sequence="5"
+	/>
 </odoo>

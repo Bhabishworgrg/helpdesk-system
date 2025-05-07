@@ -6,28 +6,28 @@ from odoo import fields, models, api
 class Todo(models.Model):
     _inherit = 'todo_app.todo'
 
-    stage_id = fields.Many2one('helpdesk_todo.stage', string='Stage', default=lambda self: self.env['helpdesk_todo.stage'].search([('sequence', '=', 1)]), group_expand='_read_group_stage_id')
+    merged_stage_id = fields.Many2one('helpdesk_todo.stage', string='Stage', default=lambda self: self.env['helpdesk_todo.stage'].search([('sequence', '=', 1)]), group_expand='_read_group_merged_stage_id')
     ticket_id = fields.Many2one('helpdesk_app.helpdesk_ticket', string='Ticket')
     leader_id = fields.Many2one('res.users', string='Leader')
     is_completed_or_cancelled = fields.Boolean(string='Is Completed Stage', compute='_compute_is_completed_or_cancelled')
 
-    @api.depends('stage_id')
+    @api.depends('merged_stage_id')
     def _compute_is_completed_or_cancelled(self):
         for rec in self:
-            rec.is_completed_or_cancelled = rec.stage_id in [
+            rec.is_completed_or_cancelled = rec.merged_stage_id in [
                 self.env.ref('helpdesk_todo.stage_3'), 
                 self.env.ref('helpdesk_todo.stage_4'),
             ]
 
     def write(self, vals):
-        if 'stage_id' in vals:
+        if 'merged_stage_id' in vals:
             self.ticket_id.sudo().write({
-                'stage_id': vals['stage_id']
+                'merged_stage_id': vals['merged_stage_id']
             })
         return super().write(vals)
     
     @api.model
-    def _read_group_stage_id(self, records, domain, order=None):
+    def _read_group_merged_stage_id(self, records, domain, order=None):
         return records.search([])
 
     @api.model

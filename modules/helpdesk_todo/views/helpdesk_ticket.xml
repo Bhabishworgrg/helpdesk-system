@@ -18,15 +18,23 @@
 		<field name="arch" type="xml">
 			<xpath expr="//form/header/button" position="before">
 				<button name="%(helpdesk_todo.action_helpdesk_todo_helpdesk_ticket_send_wizard)d" string="Send Ticket" type="action" class="btn-primary" invisible="type_id == 2" groups="helpdesk_app.group_helpdesk_admin,helpdesk_app.group_helpdesk_manager,base.group_system,base.group_erp_manager"/>
-				<field name="stage_id" widget="statusbar"/>
 			</xpath>
+
+			<field name="stage_id" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</field>
+			<xpath expr="//form/header" position="inside">
+				<field name="merged_stage_id" widget="statusbar"/>
+			</xpath>
+
 			<button name="%(helpdesk_app.action_helpdesk_app_helpdesk_ticket_restore_wizard)d" position="attributes">
 				<attribute name="class">btn-secondary</attribute>
-				<attribute name="invisible">not is_completed_or_cancelled</attribute>
+				<attribute name="invisible">not merged_is_completed_or_cancelled</attribute>
 			</button>
+
 			<button name="%(helpdesk_app.action_helpdesk_app_helpdesk_ticket_cancel_wizard)d" position="attributes">
 				<attribute name="class">btn-secondary</attribute>
-				<attribute name="invisible">is_completed_or_cancelled</attribute>
+				<attribute name="invisible">merged_is_completed_or_cancelled</attribute>
 			</button>
 		</field>
 	</record>
@@ -36,9 +44,11 @@
 		<field name="model">helpdesk_app.helpdesk_ticket</field>
 		<field name="inherit_id" ref="helpdesk_app.helpdesk_app_helpdesk_ticket_view_search"/>
 		<field name="arch" type="xml">
+			<filter name="group_stage_id" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</filter>
 			<xpath expr="//search/group" position="inside">
-				<separator/>
-				<filter name="group_stage_id" string="Stages" context="{ 'group_by':'stage_id' }"/>
+				<filter name="group_merged_stage_id" string="Stages" context="{ 'group_by':'merged_stage_id' }"/>
 			</xpath>
 		</field>
 	</record>
@@ -46,7 +56,7 @@
 	<record id="helpdesk_app.action_helpdesk_app_helpdesk_ticket_all" model="ir.actions.act_window">
 		<field name="context">
 			{
-				'search_default_group_stage_id': 1,
+				'search_default_group_merged_stage_id': True,
 			}
 		</field>
 	</record>
@@ -54,7 +64,7 @@
 	<record id="helpdesk_app.action_helpdesk_app_helpdesk_ticket_completed" model="ir.actions.act_window">
 		<field name="context">
 			{
-				'search_default_group_stage_id': 1,
+				'search_default_group_merged_stage_id': 1,
 			}
 		</field>
 	</record>
@@ -62,7 +72,7 @@
 	<record id="helpdesk_app.action_helpdesk_app_helpdesk_ticket_incomplete" model="ir.actions.act_window">
 		<field name="context">
 			{
-				'search_default_group_stage_id': 1,
+				'search_default_group_merged_stage_id': 1,
 			}
 		</field>
 	</record>

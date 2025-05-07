@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+	<record id="todo_app.menu_todo_stage" model="ir.ui.menu">
+		<field name="active">False</field>
+	</record>
+
 	<menuitem
 		id="menu_todo_stage"
 		name="Stage"
 		parent="todo_app.menu_todo_config"
 		action="action_helpdesk_todo_stage"
-		sequence="2"
+		sequence="5"
 	/>
 
 	<menuitem

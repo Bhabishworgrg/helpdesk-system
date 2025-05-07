@@ -5,16 +5,22 @@
 		<field name="model">todo_app.todo</field>
 		<field name="inherit_id" ref="todo_app.todo_app_todo_view_form"/>
 		<field name="arch" type="xml">
+			<field name="stage_id" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</field>
 			<xpath expr="//form/header" position="inside">
-				<field name="stage_id" widget="statusbar"/>
+				<field name="merged_stage_id" widget="statusbar"/>
 			</xpath>
+			
 			<button name="%(todo_app.action_todo_app_todo_next_stage_wizard)d" position="attributes">
 				<attribute name="invisible">is_completed_or_cancelled</attribute>
 			</button>
+			
 			<button name="%(todo_app.action_todo_app_todo_restore_wizard)d" position="attributes">
 				<attribute name="class">btn-secondary</attribute>
 				<attribute name="invisible">not is_completed_or_cancelled</attribute>
 			</button>
+			
 			<button name="%(todo_app.action_todo_app_todo_cancel_wizard)d" position="attributes">
 				<attribute name="class">btn-secondary</attribute>
 				<attribute name="invisible">is_completed_or_cancelled</attribute>
@@ -27,9 +33,11 @@
 		<field name="model">todo_app.todo</field>
 		<field name="inherit_id" ref="todo_app.todo_app_todo_view_search"/>
 		<field name="arch" type="xml">
+			<filter name="group_stage_id" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</filter>
 			<xpath expr="//search/group" position="inside">
-				<separator/>
-				<filter name="group_stage_id" string="Stages" context="{ 'group_by':'stage_id' }"/>
+				<filter name="group_merged_stage_id" string="Stages" context="{ 'group_by':'merged_stage_id' }"/>
 			</xpath>
 		</field>
 	</record>
@@ -37,7 +45,7 @@
 	<record id="todo_app.action_todo_app_todo_all" model="ir.actions.act_window">
 		<field name="context">
 			{
-				'search_default_group_stage_id': 1,
+				'search_default_group_merged_stage_id': 1,
 			}
 		</field>
 	</record>
@@ -45,7 +53,7 @@
 	<record id="todo_app.action_todo_app_todo_completed" model="ir.actions.act_window">
 		<field name="context">
 			{
-				'search_default_group_stage_id': 1,
+				'search_default_group_merged_stage_id': 1,
 			}
 		</field>
 		<field name="domain">[('is_complete', '=', True)]</field>
@@ -54,7 +62,7 @@
 	<record id="todo_app.action_todo_app_todo_incomplete" model="ir.actions.act_window">
 		<field name="context">
 			{
-				'search_default_group_stage_id': 1,
+				'search_default_group_merged_stage_id': 1,
 			}
 		</field>
 		<field name="domain">[('is_complete', '=', False)]</field>

@@ -57,7 +57,7 @@
 							<t t-foreach="tickets" t-as="ticket">
 								<tr>
 									<td><span t-esc="ticket['title']"/></td>
-									<td><span t-esc="ticket['stage_id'][1]"/></td>
+									<td><span t-esc="ticket['merged_stage_id'][1]"/></td>
 									<td><span t-esc="ticket['reported_date']"/></td>
 									<td><span t-esc="ticket['category_id'][1]"/></td>
 									<td><span t-esc="ticket['partner_id'][1]"/></td>

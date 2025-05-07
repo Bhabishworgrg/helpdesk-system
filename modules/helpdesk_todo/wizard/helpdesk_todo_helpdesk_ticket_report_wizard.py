@@ -23,7 +23,7 @@ class HelpdeskTicketReportWizard(models.TransientModel):
 
         processed_tickets = []
         for ticket in tickets.read([
-            'title', 'stage_id', 'reported_date', 'category_id', 'partner_id', 'team_member_id'
+            'title', 'merged_stage_id', 'reported_date', 'category_id', 'partner_id', 'team_member_id'
         ]):
             for field in ['category_id', 'partner_id', 'team_member_id']:
                 if not ticket.get(field):
@@ -32,7 +32,7 @@ class HelpdeskTicketReportWizard(models.TransientModel):
 
         stage_counts = {}
         for ticket in tickets:
-            stage_name = ticket.stage_id.name
+            stage_name = ticket.merged_stage_id.name
             stage_counts[stage_name] = stage_counts.get(stage_name, 0) + 1
 
         data = {

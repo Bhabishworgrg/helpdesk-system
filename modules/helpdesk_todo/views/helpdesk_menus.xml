@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+	<record id="helpdesk_app.menu_helpdesk_stage" model="ir.ui.menu">
+		<field name="active">False</field>
+	</record>
+
 	<menuitem
 		id="menu_helpdesk_stage"
 		name="Stage"
@@ -8,6 +12,7 @@
 		sequence="5"
 	/>
 
+	<!-- Report -->
 	<menuitem
 		id="menu_helpdesk_report"
 		name="Report"
