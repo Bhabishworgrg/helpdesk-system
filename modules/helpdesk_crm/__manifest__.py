@@ -7,6 +7,7 @@
     'depends': [
         'helpdesk_app',
         'crm',
+        'helpdesk_todo',
     ],
     'data': [
         'security/ir.model.access.csv',
