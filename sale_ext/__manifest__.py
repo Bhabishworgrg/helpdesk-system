@@ -2,6 +2,7 @@
 
 {
     'name': 'Sale Extension',
+    'summary': 'An extension to Sale module',
     'author': 'Bhabishwor Gurung',
     'category': 'Hidden',
     'depends': [
@@ -14,5 +15,5 @@
         'views/sale_order.xml',
     ],
     'installable': True,
-    'license': 'GPL-3',
+    'license': 'MIT',
 }

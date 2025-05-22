@@ -2,6 +2,7 @@
 
 {
     'name': 'Ticket to Lead',
+    'summary': 'Convert Helpdesk Tickets to CRM Leads',
     'author': 'Bhabishwor Gurung',
     'category': 'Hidden',
     'depends': [
@@ -17,5 +18,5 @@
     'installable': True,
     'application': False,
     'auto_install': True,
-    'license': 'GPL-3',
+    'license': 'MIT',
 }

@@ -2,6 +2,7 @@
 
 {
     'name': 'Todo App',
+    'summary': 'A module to manage Todo Tasks',
     'icon': '/todo_app/static/description/todo.png',
     'author': 'Bhabishwor Gurung',
     'depends': [
@@ -37,5 +38,5 @@
     ],
     'installable': True,
     'application': True,
-    'license': 'GPL-3',
+    'license': 'MIT',
 }

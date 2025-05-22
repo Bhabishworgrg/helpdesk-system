@@ -2,6 +2,7 @@
 
 {
     'name': 'CRM Extension',
+    'summary': 'An extension to CRM module',
     'author': 'Bhabishwor Gurung',
     'category': 'Hidden',
     'depends': [
@@ -13,5 +14,5 @@
         'views/crm_lead.xml',
     ],
     'installable': True,
-    'license': 'GPL-3',
+    'license': 'MIT',
 }

@@ -2,6 +2,7 @@
 
 {
     'name': 'Ticket to Todo',
+    'summary': 'Convert Helpdesk Tickets to Todo Tasks',
     'author': 'Bhabishwor Gurung',
     'category': 'Hidden',
     'depends': [
@@ -25,5 +26,5 @@
     'installable': True,
     'application': False,
     'auto_install': True,
-    'license': 'GPL-3',
+    'license': 'MIT',
 }
