@@ -1,6 +1,2 @@
-.env
-venv/
-odoo/
-odoo-dev.conf
-docker-compose.yml
 __pycache__/
+odoo.conf
